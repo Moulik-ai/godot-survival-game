@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://ctc8pxuh6krj2"]
+
+[ext_resource type="PackedScene" uid="uid://b8ds4hnxbjnuq" path="res://Player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://benxnvd2mvcgm" path="res://EnemySpawner.cs" id="3_h2yge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(400, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(20, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(20, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(400, 20)
+
+[node name="Main" type="Node2D" unique_id=1702702789]
+
+[node name="Player" parent="." unique_id=42431176 instance=ExtResource("1_ig7tw")]
+position = Vector2(400, 300)
+
+[node name="World" type="Node2D" parent="." unique_id=1975025510]
+
+[node name="WallTop" type="StaticBody2D" parent="World" unique_id=1833870919]
+position = Vector2(400, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WallTop" unique_id=2058626672]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="ColorRect" type="ColorRect" parent="World/WallTop" unique_id=1913047723]
+offset_left = -400.0
+offset_top = -20.0
+offset_right = 400.0
+offset_bottom = 20.0
+color = Color(1, 0.089999974, 0.089999974, 1)
+
+[node name="WallRight" type="StaticBody2D" parent="World" unique_id=1557861003]
+position = Vector2(780, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WallRight" unique_id=797246135]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="ColorRect" type="ColorRect" parent="World/WallRight" unique_id=513268305]
+offset_left = -20.0
+offset_top = -300.0
+offset_right = 20.0
+offset_bottom = 300.0
+color = Color(1, 0.089999974, 0.089999974, 1)
+
+[node name="WallLeft" type="StaticBody2D" parent="World" unique_id=610202843]
+position = Vector2(20, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WallLeft" unique_id=931463682]
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="ColorRect" type="ColorRect" parent="World/WallLeft" unique_id=567656082]
+offset_left = -20.0
+offset_top = -300.0
+offset_right = 20.0
+offset_bottom = 300.0
+color = Color(1, 0.089999974, 0.089999974, 1)
+
+[node name="WallBottom" type="StaticBody2D" parent="World" unique_id=351207098]
+position = Vector2(400, 580)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WallBottom" unique_id=1830351059]
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="ColorRect" type="ColorRect" parent="World/WallBottom" unique_id=1805771695]
+offset_left = -400.0
+offset_top = -20.0
+offset_right = 400.0
+offset_bottom = 20.0
+color = Color(1, 0.089999974, 0.089999974, 1)
+
+[node name="Enemy" parent="." unique_id=1442220574 instance=ExtResource("2_0xm2m")]
+position = Vector2(206, 152)
+
+[node name="EnemySpawner" type="Node" parent="." unique_id=1893713910]
+script = ExtResource("3_h2yge")
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawner" unique_id=1543823265]
+wait_time = 2.0
+autostart = true
