@@ -5,6 +5,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfnw"]
 size = Vector2(25, 25)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
+
 [node name="Player" type="CharacterBody2D" unique_id=42431176]
 script = ExtResource("1_xhfnw")
 
@@ -16,3 +18,10 @@ offset_bottom = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=393162701]
 shape = SubResource("RectangleShape2D_xhfnw")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=953963236]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1985626952]
+shape = SubResource("RectangleShape2D_kpjcp")
+
+[connection signal="body_entered" from="Hitbox" to="." method="OnHitboxBodyEntered"]

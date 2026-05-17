@@ -5,7 +5,9 @@ public partial class Player : CharacterBody2D
 {
 	[Export]
 	public float Speed = 300f;
-
+	
+	private bool isDead = false;
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 direction = Vector2.Zero;
@@ -27,5 +29,26 @@ public partial class Player : CharacterBody2D
 		Velocity = direction * Speed;
 
 		MoveAndSlide();
+		
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			KinematicCollision2D collision = GetSlideCollision(i);
+			
+			if (collision.GetCollider() is Enemy)
+			{
+				Die();
+			}
+		}
+	}
+
+private void Die()
+{
+	GD.Print("Touched");
+	if (isDead)        
+		return;
+		
+	isDead = true;
+	GD.Print ("GAME OVER");
+	GetTree().ReloadCurrentScene();
 	}
 }
