@@ -5,11 +5,19 @@ public partial class Player : CharacterBody2D
 {
 	[Export]
 	public float Speed = 300f;
+	private float survivalTime = 0f;
+	private Label scoreLabel;
 	
 	private bool isDead = false;
 	
+	public override void _Ready()
+	{
+		scoreLabel = GetTree().Root.GetNode<Label>("Main/UI/ScoreLabel");
+	}
 	public override void _PhysicsProcess(double delta)
 	{
+		survivalTime += (float)delta;
+		scoreLabel.Text = "Score: " + ((int)survivalTime).ToString();
 		Vector2 direction = Vector2.Zero;
 
 		if (Input.IsActionPressed("ui_right"))
