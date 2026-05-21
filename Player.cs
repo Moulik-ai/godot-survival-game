@@ -7,12 +7,14 @@ public partial class Player : CharacterBody2D
 	public float Speed = 300f;
 	private float survivalTime = 0f;
 	private Label scoreLabel;
-	
+	private PackedScene bulletScene;
+	private Vector2 lastDirection = Vector2.Right;
 	private bool isDead = false;
 	
 	public override void _Ready()
 	{
 		scoreLabel = GetTree().Root.GetNode<Label>("Main/UI/ScoreLabel");
+		bulletScene = GD.Load<PackedScene>("res://Bullet.tscn");
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -31,8 +33,17 @@ public partial class Player : CharacterBody2D
 
 		if (Input.IsActionPressed("ui_up"))
 			direction.Y -= 1;
+			
+		if (Input.IsActionJustPressed("ui_accept"))
+		{
+			Shoot();
+		}
 
 		direction = direction.Normalized();
+		if (direction != Vector2.Zero)
+		{
+			lastDirection = direction;
+		}
 
 		Velocity = direction * Speed;
 
@@ -59,4 +70,14 @@ private void Die()
 	GD.Print ("GAME OVER");
 	GetTree().ReloadCurrentScene();
 	}
+
+
+private void Shoot()
+{
+	Bullet bullet = bulletScene.Instantiate<Bullet>();
+	
+	bullet.Position = Position;
+	bullet.Direction = lastDirection;
+	GetTree().CurrentScene.AddChild(bullet);
+}
 }
