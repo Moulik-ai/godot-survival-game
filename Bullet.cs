@@ -15,8 +15,11 @@ public partial class Bullet: Area2D
 	{
 		if (body is Enemy)
 		{
-			body.QueueFree();
-			QueueFree();
+			if (body is Enemy enemy)
+			{
+				enemy.TakeDamage(1);
+				QueueFree();
+			}
 		}
 	}
 }

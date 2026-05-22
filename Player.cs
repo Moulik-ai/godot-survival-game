@@ -10,6 +10,11 @@ public partial class Player : CharacterBody2D
 	private PackedScene bulletScene;
 	private Vector2 lastDirection = Vector2.Right;
 	private bool isDead = false;
+	private bool canDash = true;
+	private bool isDashing = false;
+	private float dashSpeed = 900f;
+	private float dashDuration = 0.15f;
+	private float dashCooldown = 1f;
 	
 	public override void _Ready()
 	{
@@ -38,6 +43,11 @@ public partial class Player : CharacterBody2D
 		{
 			Shoot();
 		}
+		
+		if (Input.IsActionJustPressed("ui_select") && canDash)
+		{
+			Dash();
+		}
 
 		direction = direction.Normalized();
 		if (direction != Vector2.Zero)
@@ -45,7 +55,14 @@ public partial class Player : CharacterBody2D
 			lastDirection = direction;
 		}
 
-		Velocity = direction * Speed;
+		if (isDashing)
+		{
+			Velocity = lastDirection * dashSpeed;
+		}
+		else
+		{
+			Velocity = direction * Speed;
+		}
 
 		MoveAndSlide();
 		
@@ -71,7 +88,6 @@ private void Die()
 	GetTree().ReloadCurrentScene();
 	}
 
-
 private void Shoot()
 {
 	Bullet bullet = bulletScene.Instantiate<Bullet>();
@@ -79,5 +95,17 @@ private void Shoot()
 	bullet.Position = Position;
 	bullet.Direction = lastDirection;
 	GetTree().CurrentScene.AddChild(bullet);
+}
+
+private async void Dash()
+{
+	canDash = false;
+	isDashing = true;
+	
+	await ToSignal(GetTree().CreateTimer(dashDuration), "timeout");
+	isDashing = false;
+	
+	await ToSignal(GetTree().CreateTimer(dashCooldown), "timeout");
+	canDash = true;
 }
 }

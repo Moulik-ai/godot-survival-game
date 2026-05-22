@@ -5,6 +5,7 @@ public partial class Enemy: CharacterBody2D
 {
 	[Export]
 	public float Speed = 150f;
+	public int Health = 3;
 	private Player player;
 	
 	public override void _Ready()
@@ -20,5 +21,17 @@ public partial class Enemy: CharacterBody2D
 		Velocity = direction * Speed;
 		
 		MoveAndSlide();
+	}
+	
+	public void TakeDamage(int damage)
+	{
+		Health -= damage;
+		Modulate = Colors.Red;
+		GD.Print("Enemy HP: " + Health);
+		
+		if (Health <= 0)
+		{
+			QueueFree();
+		}
 	}
 }
