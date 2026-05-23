@@ -12,7 +12,7 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
-color = Color(0.029506557, 0.029506557, 0.029506557, 1)
+color = Color(0.6337619, 0.2928271, 0.29979452, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1149805181]
 shape = SubResource("RectangleShape2D_gqquq")

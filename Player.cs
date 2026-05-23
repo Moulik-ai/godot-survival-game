@@ -15,6 +15,9 @@ public partial class Player : CharacterBody2D
 	private float dashSpeed = 900f;
 	private float dashDuration = 0.15f;
 	private float dashCooldown = 1f;
+	private bool canShoot = true;
+	private float ShootCooldown = 0.4f;
+	private float upgradeTimer = 0f;
 	
 	public override void _Ready()
 	{
@@ -25,6 +28,19 @@ public partial class Player : CharacterBody2D
 	{
 		survivalTime += (float)delta;
 		scoreLabel.Text = "Score: " + ((int)survivalTime).ToString();
+		
+		upgradeTimer += (float)delta;
+		if(upgradeTimer >= 3f)
+		{
+			upgradeTimer = 0f;
+			
+			if(ShootCooldown > 0.1f)
+			{
+				ShootCooldown -= 0.05f;
+				GD.Print ("Fire Rate Increased!");
+				
+			}
+		}
 		Vector2 direction = Vector2.Zero;
 
 		if (Input.IsActionPressed("ui_right"))
@@ -39,7 +55,7 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionPressed("ui_up"))
 			direction.Y -= 1;
 			
-		if (Input.IsActionJustPressed("ui_accept"))
+		if (Input.IsActionJustPressed("ui_accept") && canShoot)
 		{
 			Shoot();
 		}
@@ -88,13 +104,17 @@ private void Die()
 	GetTree().ReloadCurrentScene();
 	}
 
-private void Shoot()
+private async void Shoot()
 {
 	Bullet bullet = bulletScene.Instantiate<Bullet>();
 	
 	bullet.Position = Position;
 	bullet.Direction = lastDirection;
 	GetTree().CurrentScene.AddChild(bullet);
+	
+	canShoot = false;
+	await ToSignal (GetTree().CreateTimer(ShootCooldown), "timeout");
+	canShoot = true;
 }
 
 private async void Dash()
