@@ -5,14 +5,16 @@ public partial class Enemy: CharacterBody2D
 {
 	[Export]
 	public float Speed = 150f;
-	public int Health = 3;
+	public int Health = 1;
 	private Player player;
 	private Color originalColor; 
+	private GpuParticles2D deathParticles;
 	
 	public override void _Ready()
 	{
 		player = GetTree().Root.GetNode<Player>("Main/Player");
 		originalColor = Modulate;
+		deathParticles = GetNode<GpuParticles2D>("DeathParticles");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -37,6 +39,11 @@ public partial class Enemy: CharacterBody2D
 		
 		if (Health <= 0)
 		{
+			deathParticles.Reparent(GetTree().CurrentScene);
+			deathParticles.GlobalPosition = GlobalPosition;
+			deathParticles.Emitting = true;
+			Visible = false;
+			await ToSignal(GetTree().CreateTimer(0.5f),"timeout");
 			QueueFree();
 		}
 	}
