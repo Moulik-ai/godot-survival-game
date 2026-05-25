@@ -39,6 +39,8 @@ public partial class Enemy: CharacterBody2D
 		
 		if (Health <= 0)
 		{
+			CameraController camera = GetTree().Root.GetNode<CameraController>("Main/Player/Camera2D");
+			camera.Shake(8f);
 			deathParticles.Reparent(GetTree().CurrentScene);
 			deathParticles.GlobalPosition = GlobalPosition;
 			deathParticles.Emitting = true;

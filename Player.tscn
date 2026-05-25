@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b8ds4hnxbjnuq"]
 
 [ext_resource type="Script" uid="uid://l4rkjltf2s5" path="res://Player.cs" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://iyurtm2wwuth" path="res://CameraController.cs" id="2_kpjcp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfnw"]
 size = Vector2(25, 25)
@@ -24,5 +25,12 @@ shape = SubResource("RectangleShape2D_xhfnw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1985626952]
 shape = SubResource("RectangleShape2D_kpjcp")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1256388229]
+limit_left = 0
+limit_top = 0
+limit_right = 800
+limit_bottom = 600
+script = ExtResource("2_kpjcp")
 
 [connection signal="body_entered" from="Hitbox" to="." method="OnHitboxBodyEntered"]
