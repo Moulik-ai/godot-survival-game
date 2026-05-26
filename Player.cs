@@ -18,6 +18,9 @@ public partial class Player : CharacterBody2D
 	private bool canShoot = true;
 	private float ShootCooldown = 0.4f;
 	private float upgradeTimer = 0f;
+	private int currentXP = 0;
+	private int currentLevel = 1;
+	private int xpToNextLevel = 5;
 	
 	public override void _Ready()
 	{
@@ -115,6 +118,27 @@ private async void Shoot()
 	canShoot = false;
 	await ToSignal (GetTree().CreateTimer(ShootCooldown), "timeout");
 	canShoot = true;
+}
+
+public void GainXP(int amount)
+{
+	currentXP += amount;
+	GD.Print("XP: " + currentXP);
+	
+	if(currentXP >= xpToNextLevel)
+	{
+		LevelUp();
+	}
+}
+
+private void LevelUp()
+{
+	currentXP = 0;
+	currentLevel++;
+	xpToNextLevel += 5;
+	GD.Print("LEVEL UP! Level: " + currentLevel);
+	ShootCooldown *= 0.9f;
+	Speed += 20f;
 }
 
 private async void Dash()

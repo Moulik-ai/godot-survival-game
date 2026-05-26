@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cwtxxtai7h8pk"]
+
+[ext_resource type="Script" uid="uid://wxly6scoelo4" path="res://XPOrb.cs" id="1_x6nxk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hy08u"]
+radius = 8.0
+
+[node name="XPOrb" type="Area2D" unique_id=128065102]
+script = ExtResource("1_x6nxk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1081585732]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(0.019607844, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=468764731]
+shape = SubResource("CircleShape2D_hy08u")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
