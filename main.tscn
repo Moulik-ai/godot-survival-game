@@ -95,3 +95,45 @@ offset_bottom = 43.0
 theme_override_font_sizes/font_size = 32
 text = "Score: 0
 "
+
+[node name="LevelUpPanel" type="Panel" parent="UI" unique_id=516830105]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/LevelUpPanel" unique_id=1961501830]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 40
+text = "LEVEL UP!"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelUpPanel" unique_id=1259125803]
+process_mode = 2
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AttackSpeedButton" type="Button" parent="UI/LevelUpPanel/VBoxContainer" unique_id=1761498630]
+process_mode = 2
+layout_mode = 2
+text = "+ Attack Speed
+"
+
+[node name="MoveSpeedButton" type="Button" parent="UI/LevelUpPanel/VBoxContainer" unique_id=2066022327]
+process_mode = 2
+layout_mode = 2
+text = "+ Move Speed
+"
+
+[node name="DashButton" type="Button" parent="UI/LevelUpPanel/VBoxContainer" unique_id=1052418339]
+process_mode = 2
+layout_mode = 2
+text = "+ Dash Cooldown
+"

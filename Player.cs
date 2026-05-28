@@ -20,13 +20,25 @@ public partial class Player : CharacterBody2D
 	private float upgradeTimer = 0f;
 	private int currentXP = 0;
 	private int currentLevel = 1;
-	private int xpToNextLevel = 5;
+	private int xpToNextLevel = 1;
+	private Panel levelUpPanel;
+	private Button attackSpeedButton;
+	private Button moveSpeedButton;
+	private Button dashButton;
 	
 	public override void _Ready()
 	{
 		scoreLabel = GetTree().Root.GetNode<Label>("Main/UI/ScoreLabel");
 		bulletScene = GD.Load<PackedScene>("res://Bullet.tscn");
+		levelUpPanel = GetTree().Root.GetNode<Panel>("Main/UI/LevelUpPanel");
+		attackSpeedButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/AttackSpeedButton");
+		moveSpeedButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/MoveSpeedButton");
+		dashButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/DashButton");
+		attackSpeedButton.Pressed += UpgradeAttackSpeed;
+		moveSpeedButton.Pressed += UpgradeMoveSpeed;
+		dashButton.Pressed +=UpgradeDash;
 	}
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		survivalTime += (float)delta;
@@ -135,11 +147,29 @@ private void LevelUp()
 {
 	currentXP = 0;
 	currentLevel++;
-	xpToNextLevel += 5;
+	xpToNextLevel += 1;
 	GD.Print("LEVEL UP! Level: " + currentLevel);
-	ShootCooldown *= 0.9f;
-	Speed += 20f;
+	levelUpPanel.Visible = true;
+	GetTree().Paused = true;
 }
+
+	private void UpgradeAttackSpeed()
+	{
+			ShootCooldown *= 0.8f;
+			ResumeGame();
+	}
+	
+	private void UpgradeMoveSpeed()
+	{
+			Speed += 50f;
+			ResumeGame();
+	}
+	
+	private void UpgradeDash()
+	{
+			dashCooldown *= 0.8f;
+			ResumeGame();
+	}
 
 private async void Dash()
 {
@@ -151,5 +181,11 @@ private async void Dash()
 	
 	await ToSignal(GetTree().CreateTimer(dashCooldown), "timeout");
 	canDash = true;
+}
+
+private void ResumeGame()
+{
+	levelUpPanel.Visible = false;
+	GetTree().Paused = false;
 }
 }
