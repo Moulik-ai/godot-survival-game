@@ -137,3 +137,7 @@ process_mode = 2
 layout_mode = 2
 text = "+ Dash Cooldown
 "
+
+[node name="MultiShotButton" type="Button" parent="UI/LevelUpPanel/VBoxContainer" unique_id=1694970238]
+layout_mode = 2
+text = "+ Multi Shot"

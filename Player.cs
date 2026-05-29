@@ -25,6 +25,8 @@ public partial class Player : CharacterBody2D
 	private Button attackSpeedButton;
 	private Button moveSpeedButton;
 	private Button dashButton;
+	private int bulletCount = 1;
+	private Button multiShotButton;
 	
 	public override void _Ready()
 	{
@@ -34,9 +36,11 @@ public partial class Player : CharacterBody2D
 		attackSpeedButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/AttackSpeedButton");
 		moveSpeedButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/MoveSpeedButton");
 		dashButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/DashButton");
+		multiShotButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/MultiShotButton");
 		attackSpeedButton.Pressed += UpgradeAttackSpeed;
 		moveSpeedButton.Pressed += UpgradeMoveSpeed;
 		dashButton.Pressed +=UpgradeDash;
+		multiShotButton.Pressed += UpgradeMultiShot;
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -121,12 +125,13 @@ private void Die()
 
 private async void Shoot()
 {
-	Bullet bullet = bulletScene.Instantiate<Bullet>();
-	
-	bullet.Position = Position;
-	bullet.Direction = lastDirection;
-	GetTree().CurrentScene.AddChild(bullet);
-	
+	for (int i = 0; i < bulletCount; i++){
+		Bullet bullet = bulletScene.Instantiate<Bullet>();
+		bullet.Position = Position;
+		float spreadAngle = Mathf.DegToRad((i - (bulletCount-1)/2.0f)*15);
+		bullet.Direction = lastDirection.Rotated(spreadAngle);
+		GetTree().CurrentScene.AddChild(bullet);
+	}
 	canShoot = false;
 	await ToSignal (GetTree().CreateTimer(ShootCooldown), "timeout");
 	canShoot = true;
@@ -169,6 +174,12 @@ private void LevelUp()
 	{
 			dashCooldown *= 0.8f;
 			ResumeGame();
+	}
+	
+	private void UpgradeMultiShot()
+	{
+		bulletCount++;
+		ResumeGame();
 	}
 
 private async void Dash()
