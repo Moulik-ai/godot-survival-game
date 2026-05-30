@@ -2,7 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://b8ds4hnxbjnuq" path="res://Player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cwwwtopu1jh4d" path="res://TankEnemy.cs" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://benxnvd2mvcgm" path="res://EnemySpawner.cs" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bcp23kn2aj76k" path="res://FastEnemy.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://b60n31awxl5q8" path="res://TankEnemy.tscn" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://esn5bfuvcbvq" path="res://FastEnemy.cs" id="5_272bh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(400, 20)
@@ -141,3 +145,12 @@ text = "+ Dash Cooldown
 [node name="MultiShotButton" type="Button" parent="UI/LevelUpPanel/VBoxContainer" unique_id=1694970238]
 layout_mode = 2
 text = "+ Multi Shot"
+
+[node name="FastEnemy" parent="." unique_id=317937374 instance=ExtResource("4_lquwl")]
+modulate = Color(1, 1, 0.007843138, 1)
+script = ExtResource("5_272bh")
+
+[node name="TankEnemy" parent="." unique_id=1131766808 instance=ExtResource("5_7mycd")]
+modulate = Color(1, 0.03529412, 1, 1)
+script = ExtResource("3_1bvp3")
+Speed = 150.0
