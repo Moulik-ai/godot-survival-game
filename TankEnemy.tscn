@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://b60n31awxl5q8"]
 
 [ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="1_of1wh"]
+[ext_resource type="Script" uid="uid://cwwwtopu1jh4d" path="res://TankEnemy.cs" id="2_sdo21"]
 
 [node name="Enemy" unique_id=1442220574 instance=ExtResource("1_of1wh")]
-Speed = 75.0
+script = ExtResource("2_sdo21")
+Health = 3
+
+[node name="ColorRect" parent="." index="0" unique_id=52408027]
+color = Color(0.39911115, 0.44492817, 0.031546243, 1)

@@ -5,11 +5,15 @@ public partial class TankEnemy: CharacterBody2D
 {
 	[Export]
 	public float Speed = 150f;
+	
+	[Export]
 	public int Health = 3;
+	public int XPReward = 1;
 	private Player player;
 	private Color originalColor; 
 	private GpuParticles2D deathParticles;
 	private PackedScene xpOrbScene;
+	private AudioStreamPlayer explosionSound;
 	
 	public override void _Ready()
 	{
@@ -38,6 +42,7 @@ public partial class TankEnemy: CharacterBody2D
 		Modulate = originalColor;
 		
 		GD.Print("Enemy HP: " + Health);
+		explosionSound.Play();
 		
 		if (Health <= 0)
 		{
@@ -50,6 +55,7 @@ public partial class TankEnemy: CharacterBody2D
 			await ToSignal(GetTree().CreateTimer(0.5f),"timeout");
 			XPOrb orb = xpOrbScene.Instantiate<XPOrb>();
 			orb.Position = Position;
+			orb.XPValue = XPReward;
 			GetTree().CurrentScene.AddChild(orb);
 			QueueFree();
 		}

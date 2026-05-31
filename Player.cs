@@ -27,6 +27,9 @@ public partial class Player : CharacterBody2D
 	private Button dashButton;
 	private int bulletCount = 1;
 	private Button multiShotButton;
+	private AudioStreamPlayer shootSound;
+	private AudioStreamPlayer coinSound;
+	private AudioStreamPlayer dieSound;
 	
 	public override void _Ready()
 	{
@@ -41,6 +44,9 @@ public partial class Player : CharacterBody2D
 		moveSpeedButton.Pressed += UpgradeMoveSpeed;
 		dashButton.Pressed +=UpgradeDash;
 		multiShotButton.Pressed += UpgradeMultiShot;
+		shootSound = GetNode<AudioStreamPlayer>("Shootsound");
+		coinSound = GetNode<AudioStreamPlayer>("Coinsound");
+		dieSound = GetNode<AudioStreamPlayer>("Diesound");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -105,7 +111,7 @@ public partial class Player : CharacterBody2D
 		{
 			KinematicCollision2D collision = GetSlideCollision(i);
 			
-			if (collision.GetCollider() is Enemy)
+			if (collision.GetCollider() is Enemy || collision.GetCollider() is FastEnemy || collision.GetCollider() is TankEnemy || collision.GetCollider() is BossEnemy)
 			{
 				Die();
 			}
@@ -125,6 +131,7 @@ private void Die()
 
 private async void Shoot()
 {
+	
 	for (int i = 0; i < bulletCount; i++){
 		Bullet bullet = bulletScene.Instantiate<Bullet>();
 		bullet.Position = Position;
@@ -132,6 +139,7 @@ private async void Shoot()
 		bullet.Direction = lastDirection.Rotated(spreadAngle);
 		GetTree().CurrentScene.AddChild(bullet);
 	}
+	shootSound.Play();
 	canShoot = false;
 	await ToSignal (GetTree().CreateTimer(ShootCooldown), "timeout");
 	canShoot = true;
@@ -139,9 +147,10 @@ private async void Shoot()
 
 public void GainXP(int amount)
 {
+	
 	currentXP += amount;
 	GD.Print("XP: " + currentXP);
-	
+	coinSound.Play();
 	if(currentXP >= xpToNextLevel)
 	{
 		LevelUp();

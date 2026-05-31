@@ -5,6 +5,8 @@ public partial class EnemySpawner: Node
 {
 	private Timer spawnTimer;
 	private float difficultyTimer = 0f;
+	private float bossTimer = 0f;
+	private PackedScene bossScene;
 	private PackedScene enemyScene;
 	private PackedScene fastEnemyScene;
 	private PackedScene tankEnemyScene;
@@ -17,11 +19,13 @@ public partial class EnemySpawner: Node
 		spawnTimer.Timeout += SpawnEnemy;
 		fastEnemyScene = GD.Load<PackedScene>("res://FastEnemy.tscn");
 		tankEnemyScene = GD.Load<PackedScene>("res://TankEnemy.tscn");
+		bossScene = GD.Load<PackedScene>("res://BossEnemy.tscn");
 	}
 	
 	public override void _Process(double delta)
 	{
 		difficultyTimer += (float)delta;
+		bossTimer += (float)delta;
 		
 		if (difficultyTimer >= 5f)
 		{
@@ -32,6 +36,12 @@ public partial class EnemySpawner: Node
 				spawnTimer.WaitTime -= 0.1f;
 				GD.Print("Spawn Rate Increased: " + spawnTimer.WaitTime);
 			}
+		}
+		
+		if (bossTimer >= 7f)
+		{
+			bossTimer = 0f;
+			SpawnBoss();
 		}
 	}
 	
@@ -62,6 +72,21 @@ public partial class EnemySpawner: Node
 	enemy.Position = new Vector2(x, y);
 
 	GetTree().CurrentScene.AddChild(enemy);
+	}
+	
+	private void SpawnBoss()
+	{
+		Random random = new Random();
+		
+		float x = random.Next(50,750);
+		float y = random.Next(50,550);
+		
+		Node2D boss=   
+			bossScene.Instantiate<Node2D>();
+		
+		boss.Position = new Vector2(x,y);
+		GetTree().CurrentScene.AddChild(boss);
+		GD.Print("BOSS SPAWNED!");
 	}
 	
 }

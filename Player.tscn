@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://l4rkjltf2s5" path="res://Player.cs" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://iyurtm2wwuth" path="res://CameraController.cs" id="2_kpjcp"]
+[ext_resource type="AudioStream" uid="uid://cbpwsl0u2i8jo" path="res://kenney_desert-shooter-pack_1.0/Sounds/shoot-f.ogg" id="3_kne1u"]
+[ext_resource type="AudioStream" uid="uid://07ikrghq7msw" path="res://kenney_desert-shooter-pack_1.0/Sounds/coin-d.ogg" id="4_e80uo"]
+[ext_resource type="AudioStream" uid="uid://cvhbbwlvlohws" path="res://kenney_desert-shooter-pack_1.0/Sounds/lose-d.ogg" id="5_cxr5p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfnw"]
 size = Vector2(25, 25)
@@ -32,5 +35,17 @@ limit_top = 0
 limit_right = 800
 limit_bottom = 600
 script = ExtResource("2_kpjcp")
+
+[node name="Shootsound" type="AudioStreamPlayer" parent="." unique_id=714344088]
+stream = ExtResource("3_kne1u")
+volume_db = 4.389
+autoplay = true
+
+[node name="Coinsound" type="AudioStreamPlayer" parent="." unique_id=1666545029]
+stream = ExtResource("4_e80uo")
+autoplay = true
+
+[node name="DieSound" type="AudioStreamPlayer" parent="." unique_id=1055664812]
+stream = ExtResource("5_cxr5p")
 
 [connection signal="body_entered" from="Hitbox" to="." method="OnHitboxBodyEntered"]

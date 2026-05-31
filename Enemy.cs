@@ -5,11 +5,13 @@ public partial class Enemy: CharacterBody2D
 {
 	[Export]
 	public float Speed = 150f;
+	public int XPReward = 1;
 	public int Health = 1;
 	private Player player;
 	private Color originalColor; 
 	private GpuParticles2D deathParticles;
 	private PackedScene xpOrbScene;
+	private AudioStreamPlayer explosionSound;
 	
 	public override void _Ready()
 	{
@@ -17,6 +19,7 @@ public partial class Enemy: CharacterBody2D
 		originalColor = Modulate;
 		deathParticles = GetNode<GpuParticles2D>("DeathParticles");
 		xpOrbScene = GD.Load<PackedScene>("res://XPOrb.tscn");
+		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -31,6 +34,7 @@ public partial class Enemy: CharacterBody2D
 	
 	public async void TakeDamage(int damage)
 	{
+		
 		Health -= damage;
 		Modulate = Colors.Red;
 		
@@ -38,7 +42,7 @@ public partial class Enemy: CharacterBody2D
 		Modulate = originalColor;
 		
 		GD.Print("Enemy HP: " + Health);
-		
+		explosionSound.Play();
 		if (Health <= 0)
 		{
 			CameraController camera = GetTree().Root.GetNode<CameraController>("Main/Player/Camera2D");
@@ -50,8 +54,11 @@ public partial class Enemy: CharacterBody2D
 			await ToSignal(GetTree().CreateTimer(0.5f),"timeout");
 			XPOrb orb = xpOrbScene.Instantiate<XPOrb>();
 			orb.Position = Position;
+			orb.XPValue = XPReward;
 			GetTree().CurrentScene.AddChild(orb);
 			QueueFree();
+			
+			
 		}
 	}
 }

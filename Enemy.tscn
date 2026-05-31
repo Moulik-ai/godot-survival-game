@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlwf3r7lk23se"]
 
 [ext_resource type="Script" uid="uid://dykhg2bxwmy47" path="res://Enemy.cs" id="1_tt7e2"]
+[ext_resource type="AudioStream" uid="uid://bvrpml3auuu3x" path="res://kenney_desert-shooter-pack_1.0/Sounds/explosion-b.ogg" id="2_s7bn3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqquq"]
 
@@ -37,3 +38,6 @@ lifetime = 0.51
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_2hac7")
+
+[node name="Explosionsound" type="AudioStreamPlayer" parent="." unique_id=1997336640]
+stream = ExtResource("2_s7bn3")

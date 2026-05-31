@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://co0oreybx4wcr"]
+
+[ext_resource type="PackedScene" uid="uid://b60n31awxl5q8" path="res://TankEnemy.tscn" id="1_lthbl"]
+[ext_resource type="Script" uid="uid://dheivi1a4jqax" path="res://BossEnemy.cs" id="2_owohs"]
+
+[node name="Enemy" unique_id=1442220574 instance=ExtResource("1_lthbl")]
+scale = Vector2(3, 3)
+script = ExtResource("2_owohs")
+Speed = 100.0
+
+[node name="ColorRect" parent="." index="0" unique_id=52408027]
+color = Color(0.16978696, 0.48392475, 0.29501948, 1)
