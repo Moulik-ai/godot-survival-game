@@ -13,6 +13,7 @@ public partial class TankEnemy: CharacterBody2D
 	private Color originalColor; 
 	private GpuParticles2D deathParticles;
 	private PackedScene xpOrbScene;
+	private bool isDead = false;
 	private AudioStreamPlayer explosionSound;
 	
 	public override void _Ready()
@@ -21,6 +22,7 @@ public partial class TankEnemy: CharacterBody2D
 		originalColor = Modulate;
 		deathParticles = GetNode<GpuParticles2D>("DeathParticles");
 		xpOrbScene = GD.Load<PackedScene>("res://XPOrb.tscn");
+		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -35,6 +37,12 @@ public partial class TankEnemy: CharacterBody2D
 	
 	public async void TakeDamage(int damage)
 	{
+		
+		if(isDead)
+		{
+			return;
+		}
+		
 		Health -= damage;
 		Modulate = Colors.Red;
 		
@@ -46,6 +54,7 @@ public partial class TankEnemy: CharacterBody2D
 		
 		if (Health <= 0)
 		{
+			isDead = true;
 			CameraController camera = GetTree().Root.GetNode<CameraController>("Main/Player/Camera2D");
 			camera.Shake(8f);
 			deathParticles.Reparent(GetTree().CurrentScene);
@@ -57,6 +66,8 @@ public partial class TankEnemy: CharacterBody2D
 			orb.Position = Position;
 			orb.XPValue = XPReward;
 			GetTree().CurrentScene.AddChild(orb);
+			EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
+			spawner.EnemyKilled();
 			QueueFree();
 		}
 	}

@@ -46,7 +46,7 @@ public partial class Player : CharacterBody2D
 		multiShotButton.Pressed += UpgradeMultiShot;
 		shootSound = GetNode<AudioStreamPlayer>("Shootsound");
 		coinSound = GetNode<AudioStreamPlayer>("Coinsound");
-		dieSound = GetNode<AudioStreamPlayer>("Diesound");
+		dieSound = GetNode<AudioStreamPlayer>("DieSound");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -120,6 +120,7 @@ public partial class Player : CharacterBody2D
 
 private void Die()
 {
+	dieSound.Play();
 	GD.Print("Touched");
 	if (isDead)        
 		return;

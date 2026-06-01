@@ -56,6 +56,8 @@ public partial class Enemy: CharacterBody2D
 			orb.Position = Position;
 			orb.XPValue = XPReward;
 			GetTree().CurrentScene.AddChild(orb);
+			EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
+			spawner.EnemyKilled();
 			QueueFree();
 			
 			

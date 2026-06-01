@@ -61,6 +61,8 @@ public partial class BossEnemy: CharacterBody2D
 			orb.XPValue = XPReward;
 			GetTree().CurrentScene.AddChild(orb);
 			bossHealthBar.Visible = false;
+			EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
+			spawner.EnemyKilled();
 			QueueFree();
 		}
 	}

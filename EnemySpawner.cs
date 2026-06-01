@@ -10,6 +10,10 @@ public partial class EnemySpawner: Node
 	private PackedScene enemyScene;
 	private PackedScene fastEnemyScene;
 	private PackedScene tankEnemyScene;
+	private int currentWave = 1;
+	private int enemiesToSpawn = 0;
+	private int enemiesAlive = 0;
+	private Label waveLabel;
 	
 	
 	public override void _Ready()
@@ -20,6 +24,8 @@ public partial class EnemySpawner: Node
 		fastEnemyScene = GD.Load<PackedScene>("res://FastEnemy.tscn");
 		tankEnemyScene = GD.Load<PackedScene>("res://TankEnemy.tscn");
 		bossScene = GD.Load<PackedScene>("res://BossEnemy.tscn");
+		waveLabel = GetTree().Root.GetNode<Label>("Main/UI/WaveLabel");
+		StartWave();
 	}
 	
 	public override void _Process(double delta)
@@ -38,15 +44,21 @@ public partial class EnemySpawner: Node
 			}
 		}
 		
-		if (bossTimer >= 7f)
+		/*if (bossTimer >= 7f)
 		{
 			bossTimer = 0f;
 			SpawnBoss();
-		}
+		}*/
 	}
 	
 	private void SpawnEnemy()
 {
+	
+	if(enemiesToSpawn <= 0)
+	{
+		spawnTimer.Stop();
+		return;
+	}
 	Random random = new Random();
 
 	float x = random.Next(50, 750);
@@ -70,7 +82,7 @@ public partial class EnemySpawner: Node
 	}
 
 	enemy.Position = new Vector2(x, y);
-
+	enemiesToSpawn--;
 	GetTree().CurrentScene.AddChild(enemy);
 	}
 	
@@ -89,4 +101,38 @@ public partial class EnemySpawner: Node
 		GD.Print("BOSS SPAWNED!");
 	}
 	
+	private void StartWave()
+	{
+		waveLabel.Text = "WAVE " + currentWave;
+		enemiesToSpawn = currentWave * 5;
+		enemiesAlive = enemiesToSpawn;
+		spawnTimer.Start();
+		GD.Print("Starting Wave" + currentWave);
+	}
+	
+	public void EnemyKilled()
+	{
+		enemiesAlive--;
+		GD.Print("Enemies Remaining: " + enemiesAlive);
+		
+		if (enemiesAlive <= 0)
+		{
+			WaveComplete();
+		}
+	}
+	
+	private void WaveComplete()
+	{
+		GD.Print("Wave Complete!");
+		currentWave++;
+		
+		if (currentWave % 5 == 0)
+		{
+			SpawnBoss();
+		}
+		else
+		{
+			StartWave();
+		}
+	}
 }

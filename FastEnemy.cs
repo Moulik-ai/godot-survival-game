@@ -23,6 +23,7 @@ public partial class FastEnemy: CharacterBody2D
 		originalColor = Modulate;
 		deathParticles = GetNode<GpuParticles2D>("DeathParticles");
 		xpOrbScene = GD.Load<PackedScene>("res://XPOrb.tscn");
+		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -58,6 +59,8 @@ public partial class FastEnemy: CharacterBody2D
 			orb.Position = Position;
 			orb.XPValue = XPReward;
 			GetTree().CurrentScene.AddChild(orb);
+			EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
+			spawner.EnemyKilled();
 			QueueFree();
 		}
 	}

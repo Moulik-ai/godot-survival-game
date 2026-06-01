@@ -160,6 +160,11 @@ offset_bottom = 23.0
 text = "BOSS
 "
 
+[node name="WaveLabel" type="Label" parent="UI" unique_id=1313361729]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "WAVE 1"
+
 [node name="FastEnemy" parent="." unique_id=317937374 instance=ExtResource("4_lquwl")]
 modulate = Color(0.12315822, 0.60971165, 0.2694199, 1)
 self_modulate = Color(1, 1, 0.023529412, 1)
