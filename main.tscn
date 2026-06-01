@@ -145,6 +145,21 @@ text = "+ Dash Cooldown
 layout_mode = 2
 text = "+ Multi Shot"
 
+[node name="BossHealthBar" type="ProgressBar" parent="UI" unique_id=1711002723]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.5528999, 0.228, 0.95, 1)
+
+[node name="Label" type="Label" parent="UI/BossHealthBar" unique_id=144632271]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "BOSS
+"
+
 [node name="FastEnemy" parent="." unique_id=317937374 instance=ExtResource("4_lquwl")]
 modulate = Color(0.12315822, 0.60971165, 0.2694199, 1)
 self_modulate = Color(1, 1, 0.023529412, 1)

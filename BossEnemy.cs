@@ -12,6 +12,7 @@ public partial class BossEnemy: CharacterBody2D
 	private GpuParticles2D deathParticles;
 	private PackedScene xpOrbScene;
 	private AudioStreamPlayer explosionSound;
+	private ProgressBar bossHealthBar;
 	
 	public override void _Ready()
 	{
@@ -19,6 +20,10 @@ public partial class BossEnemy: CharacterBody2D
 		originalColor = Modulate;
 		deathParticles = GetNode<GpuParticles2D>("DeathParticles");
 		xpOrbScene = GD.Load<PackedScene>("res://XPOrb.tscn");
+		bossHealthBar = GetTree().Root.GetNode<ProgressBar>("Main/UI/BossHealthBar");
+		bossHealthBar.Visible = true;
+		bossHealthBar.MaxValue = Health;
+		bossHealthBar.Value = Health;
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -55,6 +60,7 @@ public partial class BossEnemy: CharacterBody2D
 			orb.Position = Position;
 			orb.XPValue = XPReward;
 			GetTree().CurrentScene.AddChild(orb);
+			bossHealthBar.Visible = false;
 			QueueFree();
 		}
 	}
