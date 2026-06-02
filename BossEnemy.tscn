@@ -7,6 +7,7 @@
 scale = Vector2(3, 3)
 script = ExtResource("2_owohs")
 Speed = 100.0
+Health = 30
 
 [node name="ColorRect" parent="." index="0" unique_id=52408027]
-color = Color(0.16978696, 0.48392475, 0.29501948, 1)
+color = Color(0.060959928, 0.014399986, 0.48, 1)

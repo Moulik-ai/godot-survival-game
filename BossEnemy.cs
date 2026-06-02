@@ -5,7 +5,10 @@ public partial class BossEnemy: CharacterBody2D
 {
 	[Export]
 	public float Speed = 100f;
+	
+	[Export]
 	public int Health = 30;
+	
 	public int XPReward = 10;
 	private Player player;
 	private Color originalColor; 

@@ -154,9 +154,15 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(0.5528999, 0.228, 0.95, 1)
 
 [node name="Label" type="Label" parent="UI/BossHealthBar" unique_id=144632271]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -51.0
+offset_bottom = 59.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.5730381, 0.00027097613, 0.5824703, 1)
+theme_override_font_sizes/font_size = 20
 text = "BOSS
 "
 
