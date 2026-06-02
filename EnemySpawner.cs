@@ -14,6 +14,7 @@ public partial class EnemySpawner: Node
 	private int enemiesToSpawn = 0;
 	private int enemiesAlive = 0;
 	private Label waveLabel;
+	private bool bossAlive = false;
 	
 	
 	public override void _Ready()
@@ -88,6 +89,7 @@ public partial class EnemySpawner: Node
 	
 	private void SpawnBoss()
 	{
+		bossAlive = true;
 		Random random = new Random();
 		
 		float x = random.Next(50,750);
@@ -115,7 +117,7 @@ public partial class EnemySpawner: Node
 		enemiesAlive--;
 		GD.Print("Enemies Remaining: " + enemiesAlive);
 		
-		if (enemiesAlive <= 0)
+		if (!bossAlive && enemiesAlive <= 0)
 		{
 			WaveComplete();
 		}
@@ -126,13 +128,21 @@ public partial class EnemySpawner: Node
 		GD.Print("Wave Complete!");
 		currentWave++;
 		
-		if (currentWave % 5 == 0)
+		if (currentWave % 2 == 0)
 		{
+			spawnTimer.Stop();
 			SpawnBoss();
 		}
 		else
 		{
 			StartWave();
 		}
+	}
+	
+	public void BossKilled()
+	{
+		bossAlive = false;
+		currentWave++;
+		StartWave();
 	}
 }

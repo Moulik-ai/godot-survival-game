@@ -13,6 +13,7 @@ public partial class BossEnemy: CharacterBody2D
 	private PackedScene xpOrbScene;
 	private AudioStreamPlayer explosionSound;
 	private ProgressBar bossHealthBar;
+	private bool issDead = false;
 	
 	public override void _Ready()
 	{
@@ -24,6 +25,7 @@ public partial class BossEnemy: CharacterBody2D
 		bossHealthBar.Visible = true;
 		bossHealthBar.MaxValue = Health;
 		bossHealthBar.Value = Health;
+		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -38,17 +40,20 @@ public partial class BossEnemy: CharacterBody2D
 	
 	public async void TakeDamage(int damage)
 	{
+		if (issDead)
+		{
+			return;
+		}
+		
 		Health -= damage;
-		Modulate = Colors.Red;
-		
-		await ToSignal(GetTree().CreateTimer(1f), "timeout");
-		Modulate = originalColor;
-		
+				
 		GD.Print("Boss Enemy HP: " + Health);
+		bossHealthBar.Value = Health;
 		explosionSound.Play();
 		
 		if (Health <= 0)
 		{
+			issDead = true;
 			CameraController camera = GetTree().Root.GetNode<CameraController>("Main/Player/Camera2D");
 			camera.Shake(8f);
 			deathParticles.Reparent(GetTree().CurrentScene);
@@ -62,8 +67,12 @@ public partial class BossEnemy: CharacterBody2D
 			GetTree().CurrentScene.AddChild(orb);
 			bossHealthBar.Visible = false;
 			EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
-			spawner.EnemyKilled();
+			spawner.BossKilled();
 			QueueFree();
 		}
+		
+		Modulate = Colors.Red;
+		await ToSignal(GetTree().CreateTimer(1f), "timeout");
+		Modulate = originalColor;
 	}
 }
