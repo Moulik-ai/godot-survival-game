@@ -8,6 +8,7 @@ public partial class BossEnemy: CharacterBody2D
 	
 	[Export]
 	public int Health = 30;
+
 	
 	public int XPReward = 10;
 	private Player player;

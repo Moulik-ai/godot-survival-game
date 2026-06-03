@@ -128,7 +128,7 @@ public partial class EnemySpawner: Node
 		GD.Print("Wave Complete!");
 		currentWave++;
 		
-		if (currentWave % 2 == 0)
+		if (currentWave % 3 == 0)
 		{
 			spawnTimer.Stop();
 			SpawnBoss();

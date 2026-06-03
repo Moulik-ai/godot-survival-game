@@ -30,6 +30,10 @@ public partial class Player : CharacterBody2D
 	private AudioStreamPlayer shootSound;
 	private AudioStreamPlayer coinSound;
 	private AudioStreamPlayer dieSound;
+	private int maxHealth = 3;
+	private int currentHealth = 3;
+	private bool isInvincible = false;
+	private Label healthLabel;
 	
 	public override void _Ready()
 	{
@@ -47,6 +51,7 @@ public partial class Player : CharacterBody2D
 		shootSound = GetNode<AudioStreamPlayer>("Shootsound");
 		coinSound = GetNode<AudioStreamPlayer>("Coinsound");
 		dieSound = GetNode<AudioStreamPlayer>("DieSound");
+		healthLabel = GetTree().Root.GetNode<Label>("Main/UI/HealthLabel");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -113,7 +118,7 @@ public partial class Player : CharacterBody2D
 			
 			if (collision.GetCollider() is Enemy || collision.GetCollider() is FastEnemy || collision.GetCollider() is TankEnemy || collision.GetCollider() is BossEnemy)
 			{
-				Die();
+				TakeDamage();
 			}
 		}
 	}
@@ -208,5 +213,41 @@ private void ResumeGame()
 {
 	levelUpPanel.Visible = false;
 	GetTree().Paused = false;
+}
+
+private void UpdateHealthUI()
+{
+	string hearts = "";
+	for (int i = 0; i < currentHealth; i++)
+	{
+		hearts += "❤️";
+		healthLabel.Text = hearts;
+	}
+}
+
+private async void TakeDamage()
+{
+	
+	if (isInvincible)
+	{
+		return;
+	}
+	
+	isInvincible = true;
+	currentHealth--;
+	UpdateHealthUI();
+	GD.Print("Health: " +currentHealth);
+	
+	if (currentHealth <= 0)
+	{
+		Die();
+		return;
+	}
+	Modulate = Colors.Red;
+	
+	await ToSignal(GetTree().CreateTimer(1f), "timeout");
+	Modulate = Colors.Cyan;
+	isInvincible = false;
+	
 }
 }
