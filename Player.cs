@@ -34,6 +34,9 @@ public partial class Player : CharacterBody2D
 	private int currentHealth = 3;
 	private bool isInvincible = false;
 	private Label healthLabel;
+	private Panel gameOverPanel;
+	private Label statsLabel;
+	private Button retryButton;
 	
 	public override void _Ready()
 	{
@@ -52,6 +55,10 @@ public partial class Player : CharacterBody2D
 		coinSound = GetNode<AudioStreamPlayer>("Coinsound");
 		dieSound = GetNode<AudioStreamPlayer>("DieSound");
 		healthLabel = GetTree().Root.GetNode<Label>("Main/UI/HealthLabel");
+		gameOverPanel = GetTree().Root.GetNode<Panel>("Main/UI/GameOverPanel");
+		statsLabel = GetTree().Root.GetNode<Label>("Main/UI/GameOverPanel/CenterContainer/VBoxContainer/StatsLabel");
+		retryButton = GetTree().Root.GetNode<Button>("Main/UI/GameOverPanel/CenterContainer/VBoxContainer/RetryButton");
+		retryButton.Pressed += RetryGame;
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -85,12 +92,12 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionPressed("ui_up"))
 			direction.Y -= 1;
 			
-		if (Input.IsActionJustPressed("ui_accept") && canShoot)
+		if (Input.IsActionJustPressed("ui_space") && canShoot)
 		{
 			Shoot();
 		}
 		
-		if (Input.IsActionJustPressed("ui_select") && canDash)
+		if (Input.IsActionJustPressed("ui_shift") && canDash)
 		{
 			Dash();
 		}
@@ -132,7 +139,11 @@ private void Die()
 		
 	isDead = true;
 	GD.Print ("GAME OVER");
-	GetTree().ReloadCurrentScene();
+	gameOverPanel.Visible = true;
+	EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
+	int WaveReached = spawner.GetCurrentWave();
+	statsLabel.Text = "Wave Reached : " + WaveReached + "\n Time Survived : " + ((int)survivalTime);
+	GetTree().Paused = true;
 	}
 
 private async void Shoot()
@@ -221,8 +232,8 @@ private void UpdateHealthUI()
 	for (int i = 0; i < currentHealth; i++)
 	{
 		hearts += "❤️";
-		healthLabel.Text = hearts;
 	}
+	healthLabel.Text = hearts;
 }
 
 private async void TakeDamage()
@@ -249,5 +260,10 @@ private async void TakeDamage()
 	Modulate = Colors.Cyan;
 	isInvincible = false;
 	
+}
+
+private void RetryGame(){
+	GetTree().Paused = false;
+	GetTree().ReloadCurrentScene();
 }
 }

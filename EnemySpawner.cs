@@ -145,4 +145,9 @@ public partial class EnemySpawner: Node
 		currentWave++;
 		StartWave();
 	}
+	
+	public int GetCurrentWave()
+	{
+		return currentWave;
+	}
 }
