@@ -45,9 +45,9 @@ public partial class FastEnemy: CharacterBody2D
 		Modulate = originalColor;
 		
 		GD.Print("Enemy HP: " + Health);
-		explosionSound.Play();
 		if (Health <= 0)
 		{
+			explosionSound.Play();
 			CameraController camera = GetTree().Root.GetNode<CameraController>("Main/Player/Camera2D");
 			camera.Shake(8f);
 			deathParticles.Reparent(GetTree().CurrentScene);

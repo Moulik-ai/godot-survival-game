@@ -50,10 +50,10 @@ public partial class TankEnemy: CharacterBody2D
 		Modulate = originalColor;
 		
 		GD.Print("Enemy HP: " + Health);
-		explosionSound.Play();
 		
 		if (Health <= 0)
 		{
+			explosionSound.Play();
 			isDead = true;
 			CameraController camera = GetTree().Root.GetNode<CameraController>("Main/Player/Camera2D");
 			camera.Shake(8f);

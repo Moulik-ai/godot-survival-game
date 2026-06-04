@@ -43,10 +43,10 @@ public partial class Player : CharacterBody2D
 		scoreLabel = GetTree().Root.GetNode<Label>("Main/UI/ScoreLabel");
 		bulletScene = GD.Load<PackedScene>("res://Bullet.tscn");
 		levelUpPanel = GetTree().Root.GetNode<Panel>("Main/UI/LevelUpPanel");
-		attackSpeedButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/AttackSpeedButton");
-		moveSpeedButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/MoveSpeedButton");
-		dashButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/DashButton");
-		multiShotButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/VBoxContainer/MultiShotButton");
+		attackSpeedButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/CenterContainer/VBoxContainer/AttackSpeedButton");
+		moveSpeedButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/CenterContainer/VBoxContainer/MoveSpeedButton");
+		dashButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/CenterContainer/VBoxContainer/DashButton");
+		multiShotButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/CenterContainer/VBoxContainer/MultiShotButton");
 		attackSpeedButton.Pressed += UpgradeAttackSpeed;
 		moveSpeedButton.Pressed += UpgradeMoveSpeed;
 		dashButton.Pressed +=UpgradeDash;
@@ -132,7 +132,6 @@ public partial class Player : CharacterBody2D
 
 private void Die()
 {
-	dieSound.Play();
 	GD.Print("Touched");
 	if (isDead)        
 		return;
@@ -142,7 +141,7 @@ private void Die()
 	gameOverPanel.Visible = true;
 	EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
 	int WaveReached = spawner.GetCurrentWave();
-	statsLabel.Text = "Wave Reached : " + WaveReached + "\n Time Survived : " + ((int)survivalTime);
+	statsLabel.Text = "Wave Reached : " + WaveReached + "\nTime Survived : " + ((int)survivalTime);
 	GetTree().Paused = true;
 	}
 
@@ -251,6 +250,7 @@ private async void TakeDamage()
 	
 	if (currentHealth <= 0)
 	{
+		dieSound.Play();
 		Die();
 		return;
 	}

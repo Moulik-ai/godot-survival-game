@@ -53,10 +53,11 @@ public partial class BossEnemy: CharacterBody2D
 				
 		GD.Print("Boss Enemy HP: " + Health);
 		bossHealthBar.Value = Health;
-		explosionSound.Play();
+
 		
 		if (Health <= 0)
 		{
+			explosionSound.Play();
 			issDead = true;
 			CameraController camera = GetTree().Root.GetNode<CameraController>("Main/Player/Camera2D");
 			camera.Shake(8f);
