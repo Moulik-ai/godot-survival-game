@@ -37,6 +37,9 @@ public partial class Player : CharacterBody2D
 	private Panel gameOverPanel;
 	private Label statsLabel;
 	private Button retryButton;
+	private float edgeDamageTimer = 0f;
+	private float edgeDamageInterval = 1f;
+	
 	
 	public override void _Ready()
 	{
@@ -65,6 +68,7 @@ public partial class Player : CharacterBody2D
 	{
 		survivalTime += (float)delta;
 		scoreLabel.Text = "Score: " + ((int)survivalTime).ToString();
+		CheckEdgeDamage ((float)delta);
 		
 		upgradeTimer += (float)delta;
 		if(upgradeTimer >= 3f)
@@ -266,4 +270,26 @@ private void RetryGame(){
 	GetTree().Paused = false;
 	GetTree().ReloadCurrentScene();
 }
+
+private void CheckEdgeDamage(float delta)
+{
+	bool touchingEdge = Position.X <= 20 || Position.X >= 780 || Position.Y <= 20 || Position.Y >= 580;
+	
+	if (touchingEdge)
+	{
+		edgeDamageTimer += delta;
+		
+		if (edgeDamageTimer >= edgeDamageInterval)
+		{
+			edgeDamageTimer = 0f;
+			TakeDamage();
+			GD.Print("EDGE DAMAGE!");
+		}
+	}
+	
+	else
+	{
+		edgeDamageTimer = 0f;
+	}
+	}
 }
