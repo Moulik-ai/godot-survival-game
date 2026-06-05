@@ -10,6 +10,7 @@ public partial class EnemySpawner: Node
 	private PackedScene enemyScene;
 	private PackedScene fastEnemyScene;
 	private PackedScene tankEnemyScene;
+	private PackedScene exploderEnemyScene;
 	private int currentWave = 1;
 	private int enemiesToSpawn = 0;
 	private int enemiesAlive = 0;
@@ -24,6 +25,7 @@ public partial class EnemySpawner: Node
 		spawnTimer.Timeout += SpawnEnemy;
 		fastEnemyScene = GD.Load<PackedScene>("res://FastEnemy.tscn");
 		tankEnemyScene = GD.Load<PackedScene>("res://TankEnemy.tscn");
+		exploderEnemyScene = GD.Load<PackedScene>("res://ExploderEnemy.tscn");
 		bossScene = GD.Load<PackedScene>("res://BossEnemy.tscn");
 		waveLabel = GetTree().Root.GetNode<Label>("Main/UI/WaveLabel");
 		player = GetTree().Root.GetNode<Player>("Main/Player");
@@ -78,17 +80,22 @@ public partial class EnemySpawner: Node
 
 	Node2D enemy;
 
-	if (roll < 70)
+	if (roll < 60)
 	{
 		enemy = enemyScene.Instantiate<Node2D>();
+		
 	}
-	else if (roll < 90)
+	else if (roll < 80)
 	{
 		enemy = fastEnemyScene.Instantiate<Node2D>();
 	}
-	else
+	else if (roll < 95)
 	{
 		enemy = tankEnemyScene.Instantiate<Node2D>();
+	}
+	else
+	{
+		enemy = exploderEnemyScene.Instantiate<Node2D>();
 	}
 
 	enemy.Position = spawnPosition;

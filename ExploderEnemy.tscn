@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://rgclxvpmy3kd"]
+
+[ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="1_m1cd5"]
+[ext_resource type="Script" uid="uid://cbj288sxjcwjb" path="res://ExploderEnemy.cs" id="2_3i8rm"]
+
+[node name="Enemy" unique_id=1442220574 instance=ExtResource("1_m1cd5")]
+script = ExtResource("2_3i8rm")
+Speed = 300.0
+
+[node name="ColorRect" parent="." index="0" unique_id=52408027]
+color = Color(0.02, 0.009199999, 0.009379997, 1)

@@ -128,7 +128,6 @@ public partial class Player : CharacterBody2D
 		for (int i = 0; i < GetSlideCollisionCount(); i++)
 		{
 			KinematicCollision2D collision = GetSlideCollision(i);
-			GD.Print(collision.GetCollider().GetType().Name);
 			
 			if (collision.GetCollider() is Node2D enemyNode)
 			{
@@ -258,7 +257,7 @@ private void UpdateHealthUI()
 	healthLabel.Text = hearts;
 }
 
-private async void TakeDamage()
+public async void TakeDamage()
 {
 	
 	if (isInvincible)

@@ -37,5 +37,11 @@ public partial class Bullet: Area2D
 			bossEnemy.TakeDamage(Damage);
 			QueueFree();
 		}
+		
+		else if (body is ExploderEnemy exploderEnemy)
+		{
+			exploderEnemy.TakeDamage(Damage);
+			QueueFree();
+		}
 	}
 }

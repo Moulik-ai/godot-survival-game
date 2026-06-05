@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://ctc8pxuh6krj2"]
 
 [ext_resource type="PackedScene" uid="uid://b8ds4hnxbjnuq" path="res://Player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://benxnvd2mvcgm" path="res://EnemySpawner.cs" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bcp23kn2aj76k" path="res://FastEnemy.tscn" id="4_lquwl"]
-[ext_resource type="PackedScene" uid="uid://b60n31awxl5q8" path="res://TankEnemy.tscn" id="5_7mycd"]
-[ext_resource type="Script" uid="uid://esn5bfuvcbvq" path="res://FastEnemy.cs" id="5_272bh"]
 [ext_resource type="AudioStream" uid="uid://c7e2isxmstoax" path="res://GameMusic.mp3" id="7_272bh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
@@ -78,9 +74,6 @@ offset_top = -20.0
 offset_right = 400.0
 offset_bottom = 20.0
 color = Color(0.019533576, 0.4132695, 0.68005896, 1)
-
-[node name="Enemy" parent="." unique_id=1442220574 instance=ExtResource("2_0xm2m")]
-position = Vector2(206, 152)
 
 [node name="EnemySpawner" type="Node" parent="." unique_id=1893713910]
 script = ExtResource("3_h2yge")
@@ -234,16 +227,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Retry
 "
-
-[node name="FastEnemy" parent="." unique_id=317937374 instance=ExtResource("4_lquwl")]
-modulate = Color(0.12315822, 0.60971165, 0.2694199, 1)
-self_modulate = Color(1, 1, 0.023529412, 1)
-script = ExtResource("5_272bh")
-Health = 1
-XPReward = 1
-
-[node name="TankEnemy" parent="." unique_id=1131766808 instance=ExtResource("5_7mycd")]
-modulate = Color(1, 0.03529412, 1, 1)
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=252856178]
 stream = ExtResource("7_272bh")
