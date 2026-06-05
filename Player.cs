@@ -39,6 +39,8 @@ public partial class Player : CharacterBody2D
 	private Button retryButton;
 	private float edgeDamageTimer = 0f;
 	private float edgeDamageInterval = 1f;
+	private float critChance = 10f;
+	private float critMultiplier = 2f;
 	
 	
 	public override void _Ready()
@@ -154,6 +156,17 @@ private async void Shoot()
 	
 	for (int i = 0; i < bulletCount; i++){
 		Bullet bullet = bulletScene.Instantiate<Bullet>();
+		bool isCrit = GD.Randf() < (critChance / 100f);
+		
+		if (isCrit)
+		{
+			bullet.Damage = (int)(1*critMultiplier);
+			GD.Print("💥 CRITICAL HIT!");
+		}
+		else
+		{
+			bullet.Damage = 1;
+		}
 		bullet.Position = Position;
 		float spreadAngle = Mathf.DegToRad((i - (bulletCount-1)/2.0f)*15);
 		bullet.Direction = lastDirection.Rotated(spreadAngle);
@@ -197,7 +210,7 @@ private void LevelUp()
 	{
 			Speed += 50f;
 			ResumeGame();
-	}
+	} 
 	
 	private void UpgradeDash()
 	{

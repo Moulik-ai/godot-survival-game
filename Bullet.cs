@@ -5,6 +5,7 @@ public partial class Bullet: Area2D
 {
 	public Vector2 Direction = Vector2.Zero;
 	public float Speed = 600f;
+	public int Damage = 1;
 	
 	public override void _Process(double delta)
 	{
@@ -15,25 +16,25 @@ public partial class Bullet: Area2D
 	{
 		if (body is Enemy enemy)
 		{
-			enemy.TakeDamage(1);
+			enemy.TakeDamage(Damage);
 			QueueFree();
 		}
 		
 		else if (body is FastEnemy fastEnemy)
 		{
-			fastEnemy.TakeDamage(1);
+			fastEnemy.TakeDamage(Damage);
 			QueueFree();
 		}
 		
 		else if (body is TankEnemy tankEnemy)
 		{
-			tankEnemy.TakeDamage(1);
+			tankEnemy.TakeDamage(Damage);
 			QueueFree();
 		}
 		
 		else if (body is BossEnemy bossEnemy)
 		{
-			bossEnemy.TakeDamage(1);
+			bossEnemy.TakeDamage(Damage);
 			QueueFree();
 		}
 	}
