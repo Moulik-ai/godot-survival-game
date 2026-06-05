@@ -18,6 +18,11 @@ public partial class BossEnemy: CharacterBody2D
 	private AudioStreamPlayer explosionSound;
 	private ProgressBar bossHealthBar;
 	private bool issDead = false;
+	private float chargeTimer = 0f;
+	private bool isCharging = false;
+	private Vector2 chargeDirection;
+	private float chargeSpeed = 500f;
+	private float chargeDuration = 0.5f;
 	
 	public override void _Ready()
 	{
@@ -36,8 +41,23 @@ public partial class BossEnemy: CharacterBody2D
 	{
 		if (player == null)
 			return;
+		
+		if(isCharging)
+		{
+			Velocity = chargeDirection * chargeSpeed;
+		}
+		else
+		{
+			chargeTimer += (float)delta;
 		Vector2 direction = (player.Position - Position).Normalized();
 		Velocity = direction * Speed;
+		
+		if (chargeTimer >= 4f)
+		{
+			chargeTimer= 0f;
+			StartCharge();
+		}
+		}
 		
 		MoveAndSlide();
 	}
@@ -78,6 +98,19 @@ public partial class BossEnemy: CharacterBody2D
 		
 		Modulate = Colors.Red;
 		await ToSignal(GetTree().CreateTimer(1f), "timeout");
+		Modulate = originalColor;
+	}
+	
+	private async void StartCharge()
+	{
+		Modulate = Colors.Yellow;
+		await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+		chargeDirection = (player.Position - Position).Normalized();
+		Modulate = Colors.Red;
+		isCharging = true;
+		await ToSignal(GetTree().CreateTimer(chargeDuration), "timeout");
+		
+		isCharging = false;
 		Modulate = originalColor;
 	}
 }

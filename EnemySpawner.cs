@@ -15,7 +15,7 @@ public partial class EnemySpawner: Node
 	private int enemiesAlive = 0;
 	private Label waveLabel;
 	private bool bossAlive = false;
-	
+	private Player player;
 	
 	public override void _Ready()
 	{
@@ -26,6 +26,7 @@ public partial class EnemySpawner: Node
 		tankEnemyScene = GD.Load<PackedScene>("res://TankEnemy.tscn");
 		bossScene = GD.Load<PackedScene>("res://BossEnemy.tscn");
 		waveLabel = GetTree().Root.GetNode<Label>("Main/UI/WaveLabel");
+		player = GetTree().Root.GetNode<Player>("Main/Player");
 		StartWave();
 	}
 	
@@ -61,10 +62,18 @@ public partial class EnemySpawner: Node
 		return;
 	}
 	Random random = new Random();
-
-	float x = random.Next(50, 750);
-	float y = random.Next(50, 550);
-
+	
+	Vector2 spawnPosition;
+	do
+	{
+		float x = random.Next(50, 750);
+		float y = random.Next(50, 550);
+		spawnPosition = new Vector2 (x, y);
+	}
+	while (
+		spawnPosition.DistanceTo(player.Position) < 150
+	);
+	
 	int roll = (int)GD.RandRange(0, 99);
 
 	Node2D enemy;
@@ -82,7 +91,7 @@ public partial class EnemySpawner: Node
 		enemy = tankEnemyScene.Instantiate<Node2D>();
 	}
 
-	enemy.Position = new Vector2(x, y);
+	enemy.Position = spawnPosition;
 	enemiesToSpawn--;
 	GetTree().CurrentScene.AddChild(enemy);
 	}
