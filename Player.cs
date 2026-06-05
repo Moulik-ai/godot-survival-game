@@ -128,10 +128,16 @@ public partial class Player : CharacterBody2D
 		for (int i = 0; i < GetSlideCollisionCount(); i++)
 		{
 			KinematicCollision2D collision = GetSlideCollision(i);
+			GD.Print(collision.GetCollider().GetType().Name);
 			
-			if (collision.GetCollider() is Enemy || collision.GetCollider() is FastEnemy || collision.GetCollider() is TankEnemy || collision.GetCollider() is BossEnemy)
+			if (collision.GetCollider() is Node2D enemyNode)
 			{
+				
+				if (enemyNode is Enemy || enemyNode is FastEnemy || enemyNode is TankEnemy || enemyNode is BossEnemy)
+				{
 				TakeDamage();
+
+				}
 			}
 		}
 	}
@@ -305,4 +311,5 @@ private void CheckEdgeDamage(float delta)
 		edgeDamageTimer = 0f;
 	}
 	}
+
 }

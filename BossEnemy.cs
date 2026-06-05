@@ -113,4 +113,5 @@ public partial class BossEnemy: CharacterBody2D
 		isCharging = false;
 		Modulate = originalColor;
 	}
+
 }

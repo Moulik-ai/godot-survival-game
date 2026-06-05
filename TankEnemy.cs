@@ -15,6 +15,7 @@ public partial class TankEnemy: CharacterBody2D
 	private PackedScene xpOrbScene;
 	private bool isDead = false;
 	private AudioStreamPlayer explosionSound;
+	private Vector2 knockbackVelocity = Vector2.Zero;
 	
 	public override void _Ready()
 	{
@@ -71,4 +72,5 @@ public partial class TankEnemy: CharacterBody2D
 			QueueFree();
 		}
 	}
+	
 }

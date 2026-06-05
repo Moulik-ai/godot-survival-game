@@ -13,6 +13,7 @@ public partial class Enemy: CharacterBody2D
 	private PackedScene xpOrbScene;
 	private AudioStreamPlayer explosionSound;
 	
+	
 	public override void _Ready()
 	{
 		player = GetTree().Root.GetNode<Player>("Main/Player");

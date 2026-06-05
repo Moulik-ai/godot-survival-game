@@ -34,7 +34,7 @@ public partial class FastEnemy: CharacterBody2D
 		Velocity = direction * Speed;
 		
 		MoveAndSlide();
-	}
+		}
 	
 	public async void TakeDamage(int damage)
 	{
@@ -64,4 +64,5 @@ public partial class FastEnemy: CharacterBody2D
 			QueueFree();
 		}
 	}
+
 }
