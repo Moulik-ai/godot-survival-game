@@ -18,6 +18,7 @@ initial_velocity_max = 200.0
 gravity = Vector3(0, 98, 0)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1442220574]
+motion_mode = 1
 script = ExtResource("1_tt7e2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=52408027]

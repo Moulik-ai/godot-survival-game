@@ -4,8 +4,11 @@
 [ext_resource type="Script" uid="uid://cbj288sxjcwjb" path="res://ExploderEnemy.cs" id="2_3i8rm"]
 
 [node name="Enemy" unique_id=1442220574 instance=ExtResource("1_m1cd5")]
+motion_mode = 1
 script = ExtResource("2_3i8rm")
 Speed = 300.0
+XPReward = 2
+Health = 1
 
 [node name="ColorRect" parent="." index="0" unique_id=52408027]
 color = Color(0.02, 0.009199999, 0.009379997, 1)

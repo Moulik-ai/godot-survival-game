@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://d38rxq4su0c5y" path="res://RangedEnemy.cs" id="2_o20mk"]
 
 [node name="Enemy" unique_id=1442220574 instance=ExtResource("1_05t1g")]
+motion_mode = 1
 script = ExtResource("2_o20mk")
 XPReward = 1
 Health = 1

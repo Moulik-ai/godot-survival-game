@@ -12,6 +12,7 @@ size = Vector2(25, 25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
 
 [node name="Player" type="CharacterBody2D" unique_id=42431176]
+motion_mode = 1
 script = ExtResource("1_xhfnw")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1180847835]

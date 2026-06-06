@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cwwwtopu1jh4d" path="res://TankEnemy.cs" id="2_sdo21"]
 
 [node name="Enemy" unique_id=1442220574 instance=ExtResource("1_of1wh")]
+motion_mode = 1
 script = ExtResource("2_sdo21")
 Health = 3
 
