@@ -17,6 +17,7 @@ public partial class EnemySpawner: Node
 	private Label waveLabel;
 	private bool bossAlive = false;
 	private Player player;
+	private PackedScene rangedEnemyScene;
 	
 	public override void _Ready()
 	{
@@ -27,6 +28,7 @@ public partial class EnemySpawner: Node
 		tankEnemyScene = GD.Load<PackedScene>("res://TankEnemy.tscn");
 		exploderEnemyScene = GD.Load<PackedScene>("res://ExploderEnemy.tscn");
 		bossScene = GD.Load<PackedScene>("res://BossEnemy.tscn");
+		rangedEnemyScene = GD.Load<PackedScene>("res://RangedEnemy.tscn");
 		waveLabel = GetTree().Root.GetNode<Label>("Main/UI/WaveLabel");
 		player = GetTree().Root.GetNode<Player>("Main/Player");
 		StartWave();
@@ -80,18 +82,21 @@ public partial class EnemySpawner: Node
 
 	Node2D enemy;
 
-	if (roll < 60)
+	if (roll < 50)
 	{
 		enemy = enemyScene.Instantiate<Node2D>();
-		
 	}
-	else if (roll < 80)
+	else if (roll < 75)
 	{
 		enemy = fastEnemyScene.Instantiate<Node2D>();
 	}
-	else if (roll < 95)
+	else if (roll < 85)
 	{
 		enemy = tankEnemyScene.Instantiate<Node2D>();
+	}
+	else if (roll < 95)
+	{
+		enemy = rangedEnemyScene.Instantiate<Node2D>();
 	}
 	else
 	{

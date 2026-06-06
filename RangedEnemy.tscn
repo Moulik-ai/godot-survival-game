@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ctflspct6be8n"]
+
+[ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="1_05t1g"]
+[ext_resource type="Script" uid="uid://d38rxq4su0c5y" path="res://RangedEnemy.cs" id="2_o20mk"]
+
+[node name="Enemy" unique_id=1442220574 instance=ExtResource("1_05t1g")]
+script = ExtResource("2_o20mk")
+XPReward = 1
+Health = 1
+
+[node name="ColorRect" parent="." index="0" unique_id=52408027]
+color = Color(0.48052865, 0.2232401, 0, 1)
