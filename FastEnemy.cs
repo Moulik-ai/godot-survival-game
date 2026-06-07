@@ -16,6 +16,7 @@ public partial class FastEnemy: CharacterBody2D
 	private GpuParticles2D deathParticles;
 	private PackedScene xpOrbScene;
 	private AudioStreamPlayer explosionSound;
+	private bool isElite = false;
 	
 	public override void _Ready()
 	{
@@ -63,6 +64,16 @@ public partial class FastEnemy: CharacterBody2D
 			spawner.EnemyKilled();
 			QueueFree();
 		}
+	}
+	
+	public void MakeElite()
+	{
+		isElite = true;
+		Health *= 3;
+		Speed *= 1.3f;
+		XPReward *= 3;
+		Scale *= 1.5f;
+		Modulate = Colors.Gold;
 	}
 
 }

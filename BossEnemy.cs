@@ -23,6 +23,7 @@ public partial class BossEnemy: CharacterBody2D
 	private Vector2 chargeDirection;
 	private float chargeSpeed = 1000f;
 	private float chargeDuration = 0.5f;
+	private bool isElite = false;
 	
 	public override void _Ready()
 	{
@@ -35,6 +36,11 @@ public partial class BossEnemy: CharacterBody2D
 		bossHealthBar.MaxValue = Health;
 		bossHealthBar.Value = Health;
 		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
+		
+		if(isElite)
+		{
+			bossHealthBar.Modulate = Colors.Gold;
+		}
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -113,5 +119,14 @@ public partial class BossEnemy: CharacterBody2D
 		isCharging = false;
 		Modulate = originalColor;
 	}
-
+	
+	public void MakeElite()
+	{
+		isElite = true;
+		Health *= 2;
+		Speed *= 1.2f;
+		XPReward *= 3;
+		Scale *= 1.5f;
+		Modulate = Colors.Gold;
+	}
 }

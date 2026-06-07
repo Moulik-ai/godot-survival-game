@@ -19,6 +19,7 @@ public partial class RangedEnemy: CharacterBody2D
 	private PackedScene enemyBulletScene;
 	private bool canShoot = true;
 	private float shootCooldown = 2f;
+	private bool isElite = false;
 	
 	
 	public override void _Ready()
@@ -92,5 +93,15 @@ public partial class RangedEnemy: CharacterBody2D
 		canShoot = false;
 		await ToSignal(GetTree().CreateTimer(shootCooldown), "timeout");
 		canShoot = true;
+	}
+	
+	public void MakeElite()
+	{
+		isElite = true;
+		Health *= 3;
+		Speed *= 1.3f;
+		XPReward *= 3;
+		Scale *= 1.5f;
+		Modulate = Colors.Gold;
 	}
 }

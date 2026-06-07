@@ -102,7 +102,25 @@ public partial class EnemySpawner: Node
 	{
 		enemy = exploderEnemyScene.Instantiate<Node2D>();
 	}
-
+	
+	if(GD.Randf() < 0.05f)
+		{
+			if(enemy is Enemy e)
+			{
+				e.MakeElite();
+			}
+			
+			if(enemy is FastEnemy fe)
+			{
+				fe.MakeElite();
+			}
+			
+			if(enemy is RangedEnemy re)
+			{
+				re.MakeElite();
+			}
+		}
+		
 	enemy.Position = spawnPosition;
 	enemiesToSpawn--;
 	GetTree().CurrentScene.AddChild(enemy);
@@ -118,6 +136,15 @@ public partial class EnemySpawner: Node
 		
 		Node2D boss=   
 			bossScene.Instantiate<Node2D>();
+			
+		if(currentWave % 6 == 0)
+		{
+			if (boss is BossEnemy eliteBoss)
+			{
+				eliteBoss.MakeElite();
+				GD.Print("⭐ Elite Boss Spawned!");
+			}
+		}
 		
 		boss.Position = new Vector2(x,y);
 		GetTree().CurrentScene.AddChild(boss);
