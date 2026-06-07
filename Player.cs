@@ -46,6 +46,8 @@ public partial class Player : CharacterBody2D
 	private Button critDamageButton;
 	private Button bulletDamageButton;
 	private int bulletDamage = 1;
+	private int bestWave = 0;
+	private int bestTime = 0;
 	
 	
 	public override void _Ready()
@@ -77,6 +79,7 @@ public partial class Player : CharacterBody2D
 		critChanceButton.Pressed += UpgradeCritChance;
 		critDamageButton.Pressed += UpgradeCritDamage;
 		bulletDamageButton.Pressed += UpgradeBulletDamage;
+		LoadHighScore();
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -165,7 +168,18 @@ private void Die()
 	gameOverPanel.Visible = true;
 	EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
 	int WaveReached = spawner.GetCurrentWave();
-	statsLabel.Text = "Wave Reached : " + WaveReached + "\nTime Survived : " + ((int)survivalTime);
+	
+	if (WaveReached > bestWave)
+	{
+		bestWave = WaveReached;
+	}
+	
+	if((int)survivalTime > bestTime)
+	{
+		bestTime = (int)survivalTime;
+	}
+	SaveHighScore();
+	statsLabel.Text = "Wave Reached : " + WaveReached + "\nTime Survived : " + ((int)survivalTime) + "\n\n Best Wave: " + bestWave + "\n Best Time: " + bestTime;
 	GetTree().Paused = true;
 	}
 
@@ -354,5 +368,24 @@ private void CheckEdgeDamage(float delta)
 		bulletDamage++;
 		GD.Print("Bullet Damage: " + bulletDamage);
 		ResumeGame();
+	}
+	
+	private void SaveHighScore()
+	{
+		using var file = FileAccess.Open("user://highscore.save", FileAccess.ModeFlags.Write);
+		file.StoreLine(bestWave.ToString());
+		file.StoreLine(bestTime.ToString());
+	}
+	
+	private void LoadHighScore()
+	{
+		if(!FileAccess.FileExists("user://highscore.save"))
+		{
+			return;
+		}
+		
+		using var file = FileAccess.Open("user://highscore.save", FileAccess.ModeFlags.Read);
+		bestWave = int.Parse(file.GetLine());
+		bestTime = int.Parse(file.GetLine());
 	}
 }
