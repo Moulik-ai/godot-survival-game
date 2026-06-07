@@ -41,6 +41,11 @@ public partial class Player : CharacterBody2D
 	private float edgeDamageInterval = 1f;
 	private float critChance = 10f;
 	private float critMultiplier = 2f;
+	private Button healthButton;
+	private Button critChanceButton;
+	private Button critDamageButton;
+	private Button bulletDamageButton;
+	private int bulletDamage = 1;
 	
 	
 	public override void _Ready()
@@ -64,6 +69,14 @@ public partial class Player : CharacterBody2D
 		statsLabel = GetTree().Root.GetNode<Label>("Main/UI/GameOverPanel/CenterContainer/VBoxContainer/StatsLabel");
 		retryButton = GetTree().Root.GetNode<Button>("Main/UI/GameOverPanel/CenterContainer/VBoxContainer/RetryButton");
 		retryButton.Pressed += RetryGame;
+		healthButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/CenterContainer/VBoxContainer/HealthButton");
+		critChanceButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/CenterContainer/VBoxContainer/CritChanceButton");
+		critDamageButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/CenterContainer/VBoxContainer/CritDamageButton");
+		bulletDamageButton = GetTree().Root.GetNode<Button>("Main/UI/LevelUpPanel/CenterContainer/VBoxContainer/BulletDamageButton");
+		healthButton.Pressed += UpgradeHealth;
+		critChanceButton.Pressed += UpgradeCritChance;
+		critDamageButton.Pressed += UpgradeCritDamage;
+		bulletDamageButton.Pressed += UpgradeBulletDamage;
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -165,12 +178,12 @@ private async void Shoot()
 		
 		if (isCrit)
 		{
-			bullet.Damage = (int)(1*critMultiplier);
+			bullet.Damage = (int)(bulletDamage*critMultiplier);
 			GD.Print("💥 CRITICAL HIT!");
 		}
 		else
 		{
-			bullet.Damage = 1;
+			bullet.Damage = bulletDamage;
 		}
 		bullet.Position = Position;
 		float spreadAngle = Mathf.DegToRad((i - (bulletCount-1)/2.0f)*15);
@@ -310,5 +323,36 @@ private void CheckEdgeDamage(float delta)
 		edgeDamageTimer = 0f;
 	}
 	}
-
+	
+	private void UpgradeHealth()
+	{
+		maxHealth++;
+		currentHealth++;
+		
+		UpdateHealthUI();
+		GD.Print("MAX HEALTH: " + maxHealth);
+		ResumeGame();
+	}
+	
+	private void UpgradeCritChance()
+	{
+		critChance += 5f;
+		GD.Print("CRIT CHANCE: " + critChance);
+		
+		ResumeGame();
+	}
+	
+	private void UpgradeCritDamage()
+	{
+		critMultiplier += 0.5f;
+		GD.Print("CRIT DAMAGE: " + critMultiplier);
+		ResumeGame();
+	}
+	
+	private void UpgradeBulletDamage()
+	{
+		bulletDamage++;
+		GD.Print("Bullet Damage: " + bulletDamage);
+		ResumeGame();
+	}
 }

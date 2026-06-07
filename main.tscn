@@ -147,8 +147,29 @@ text = "+ Dash Cooldown
 "
 
 [node name="MultiShotButton" type="Button" parent="UI/LevelUpPanel/CenterContainer/VBoxContainer" unique_id=728800453]
+process_mode = 2
 layout_mode = 2
 text = "+ Multi Shot"
+
+[node name="HealthButton" type="Button" parent="UI/LevelUpPanel/CenterContainer/VBoxContainer" unique_id=615219235]
+process_mode = 2
+layout_mode = 2
+text = "+ Health"
+
+[node name="CritChanceButton" type="Button" parent="UI/LevelUpPanel/CenterContainer/VBoxContainer" unique_id=1768444979]
+process_mode = 2
+layout_mode = 2
+text = "+ Critical Chance"
+
+[node name="CritDamageButton" type="Button" parent="UI/LevelUpPanel/CenterContainer/VBoxContainer" unique_id=735964274]
+process_mode = 2
+layout_mode = 2
+text = "+ Critical Damage"
+
+[node name="BulletDamageButton" type="Button" parent="UI/LevelUpPanel/CenterContainer/VBoxContainer" unique_id=1356337665]
+process_mode = 2
+layout_mode = 2
+text = "+ Bullet Damage"
 
 [node name="BossHealthBar" type="ProgressBar" parent="UI" unique_id=1711002723]
 visible = false
