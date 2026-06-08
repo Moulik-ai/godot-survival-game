@@ -48,6 +48,7 @@ public partial class Player : CharacterBody2D
 	private int bulletDamage = 1;
 	private int bestWave = 0;
 	private int bestTime = 0;
+	private PackedScene damageTextScene;
 	
 	
 	public override void _Ready()
@@ -80,6 +81,7 @@ public partial class Player : CharacterBody2D
 		critDamageButton.Pressed += UpgradeCritDamage;
 		bulletDamageButton.Pressed += UpgradeBulletDamage;
 		LoadHighScore();
+		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -192,6 +194,7 @@ private async void Shoot()
 		
 		if (isCrit)
 		{
+			bullet.IsCrit = true;
 			bullet.Damage = (int)(bulletDamage*critMultiplier);
 			GD.Print("💥 CRITICAL HIT!");
 		}

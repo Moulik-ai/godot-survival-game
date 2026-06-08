@@ -13,7 +13,8 @@ public partial class Enemy: CharacterBody2D
 	private PackedScene xpOrbScene;
 	private AudioStreamPlayer explosionSound;
 	private bool isElite = false;
-	
+	private PackedScene damageTextScene;
+	private AudioStreamPlayer criticalSound;
 	
 	public override void _Ready()
 	{
@@ -22,6 +23,8 @@ public partial class Enemy: CharacterBody2D
 		deathParticles = GetNode<GpuParticles2D>("DeathParticles");
 		xpOrbScene = GD.Load<PackedScene>("res://XPOrb.tscn");
 		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
+		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
+		criticalSound = GetNode<AudioStreamPlayer>("CriticalSound");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -34,8 +37,23 @@ public partial class Enemy: CharacterBody2D
 		MoveAndSlide();
 	}
 	
-	public async void TakeDamage(int damage)
+	public async void TakeDamage(int damage, bool isCrit = false)
 	{
+		DamageText damageText = damageTextScene.Instantiate<DamageText>();
+		damageText.Text = damage.ToString();
+		damageText.Position = GlobalPosition + new Vector2 (0, -40);
+		GetTree().CurrentScene.AddChild(damageText);
+		
+		if (isCrit)
+		{
+			criticalSound.Play();
+			damageText.Text = "💥" + damage;
+			damageText.Modulate = Colors.Gold;
+		}
+		else
+		{
+			damageText.Text = damage.ToString();
+		}
 		
 		Health -= damage;
 		Modulate = Colors.Red;

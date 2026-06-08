@@ -24,6 +24,8 @@ public partial class BossEnemy: CharacterBody2D
 	private float chargeSpeed = 1000f;
 	private float chargeDuration = 0.5f;
 	private bool isElite = false;
+	private PackedScene damageTextScene;
+	private AudioStreamPlayer criticalSound;
 	
 	public override void _Ready()
 	{
@@ -36,11 +38,13 @@ public partial class BossEnemy: CharacterBody2D
 		bossHealthBar.MaxValue = Health;
 		bossHealthBar.Value = Health;
 		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
+		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
 		
 		if(isElite)
 		{
 			bossHealthBar.Modulate = Colors.Gold;
 		}
+		criticalSound = GetNode<AudioStreamPlayer>("CriticalSound");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -68,8 +72,24 @@ public partial class BossEnemy: CharacterBody2D
 		MoveAndSlide();
 	}
 	
-	public async void TakeDamage(int damage)
+	public async void TakeDamage(int damage, bool isCrit = false)
 	{
+		DamageText damageText = damageTextScene.Instantiate<DamageText>();
+		damageText.Text = damage.ToString();
+		damageText.Position = GlobalPosition + new Vector2 (0, -40);
+		GetTree().CurrentScene.AddChild(damageText);
+		
+		if (isCrit)
+		{
+			damageText.Text = "💥 CRITICAL" + damage;
+			damageText.Modulate = Colors.Gold;
+			criticalSound.Play();
+		}
+		else
+		{
+			damageText.Text = damage.ToString();
+		}
+		
 		if (issDead)
 		{
 			return;
