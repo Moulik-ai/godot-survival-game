@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cdw26b8vuw183"]
+
+[ext_resource type="Script" uid="uid://bxtjtv7c082ln" path="res://MainMenu.cs" id="1_i26rj"]
+
+[node name="Control" type="Control" unique_id=1960496096]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_i26rj")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1856221069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.078431375, 0.078431375, 0.11764706, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1574153221]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=822697113]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1290716082]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "SQUARE SURVIVOR"
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2037304526]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "PLAY"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1890014590]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1846334642]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "QUIT"
+
+[node name="SettingsPanel" type="Panel" parent="." unique_id=1594678205]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SettingsPanel" unique_id=1689712990]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/CenterContainer" unique_id=1122393199]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/CenterContainer/VBoxContainer" unique_id=444446136]
+layout_mode = 2
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/CenterContainer/VBoxContainer" unique_id=182349070]
+layout_mode = 2
+allow_greater = true
+allow_lesser = true
+
+[node name="SFXLabel" type="Label" parent="SettingsPanel/CenterContainer/VBoxContainer" unique_id=2058592227]
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsPanel/CenterContainer/VBoxContainer" unique_id=1004437533]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="SettingsPanel/CenterContainer/VBoxContainer" unique_id=1460194248]
+layout_mode = 2
+text = "Back
+"

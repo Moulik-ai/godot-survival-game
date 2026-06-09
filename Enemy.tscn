@@ -43,6 +43,8 @@ process_material = SubResource("ParticleProcessMaterial_2hac7")
 
 [node name="Explosionsound" type="AudioStreamPlayer" parent="." unique_id=1997336640]
 stream = ExtResource("2_s7bn3")
+bus = &"SFX"
 
 [node name="CriticalSound" type="AudioStreamPlayer" parent="." unique_id=551425234]
 stream = ExtResource("3_2hac7")
+bus = &"SFX"

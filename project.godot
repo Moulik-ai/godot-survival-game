@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MovingSquare"
-run/main_scene="uid://ctc8pxuh6krj2"
+run/main_scene="uid://cdw26b8vuw183"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,12 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="MovingSquare"
+
+[global]
+
+Master=false
+Music=false
+SFX=false
 
 [input]
 

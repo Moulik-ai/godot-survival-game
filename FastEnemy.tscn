@@ -7,3 +7,9 @@ Speed = 210.0
 
 [node name="ColorRect" parent="." index="0" unique_id=52408027]
 color = Color(0.3503683, 0.2759387, 0.9198455, 1)
+
+[node name="Explosionsound" parent="." index="3" unique_id=1997336640]
+bus = &"SFX"
+
+[node name="CriticalSound" parent="." index="4" unique_id=551425234]
+bus = &"SFX"

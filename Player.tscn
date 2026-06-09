@@ -40,11 +40,14 @@ script = ExtResource("2_kpjcp")
 [node name="Shootsound" type="AudioStreamPlayer" parent="." unique_id=714344088]
 stream = ExtResource("3_kne1u")
 volume_db = 4.389
+bus = &"SFX"
 
 [node name="Coinsound" type="AudioStreamPlayer" parent="." unique_id=1666545029]
 stream = ExtResource("4_e80uo")
+bus = &"SFX"
 
 [node name="DieSound" type="AudioStreamPlayer" parent="." unique_id=1055664812]
 stream = ExtResource("5_cxr5p")
+bus = &"SFX"
 
 [connection signal="body_entered" from="Hitbox" to="." method="OnHitboxBodyEntered"]

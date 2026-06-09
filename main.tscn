@@ -253,4 +253,5 @@ text = "Retry
 stream = ExtResource("7_272bh")
 volume_db = 2.498
 autoplay = true
+bus = &"Music"
 parameters/looping = true
