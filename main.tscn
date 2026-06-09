@@ -249,6 +249,105 @@ theme_override_font_sizes/font_size = 24
 text = "Retry
 "
 
+[node name="PausePanel" type="Panel" parent="UI" unique_id=500167369]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/PausePanel" unique_id=125233479]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PausePanel/CenterContainer" unique_id=1532948712]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PauseLabel" type="Label" parent="UI/PausePanel/CenterContainer/VBoxContainer" unique_id=254804163]
+process_mode = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "PAUSED"
+
+[node name="ResumeButton" type="Button" parent="UI/PausePanel/CenterContainer/VBoxContainer" unique_id=2010205443]
+process_mode = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "RESUME"
+
+[node name="RestartButton" type="Button" parent="UI/PausePanel/CenterContainer/VBoxContainer" unique_id=39518020]
+process_mode = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "RESTART"
+
+[node name="SettingsButton" type="Button" parent="UI/PausePanel/CenterContainer/VBoxContainer" unique_id=667275525]
+process_mode = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="UI/PausePanel/CenterContainer/VBoxContainer" unique_id=36745359]
+process_mode = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "QUIT"
+
+[node name="SettingsPanel" type="Panel" parent="UI" unique_id=125068314]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/SettingsPanel" unique_id=1391987037]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SettingsPanel/CenterContainer" unique_id=1138222605]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MusicLabel" type="Label" parent="UI/SettingsPanel/CenterContainer/VBoxContainer" unique_id=1571597004]
+process_mode = 2
+layout_mode = 2
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="UI/SettingsPanel/CenterContainer/VBoxContainer" unique_id=548045983]
+process_mode = 2
+layout_mode = 2
+allow_greater = true
+allow_lesser = true
+
+[node name="SFXLabel" type="Label" parent="UI/SettingsPanel/CenterContainer/VBoxContainer" unique_id=757397272]
+process_mode = 2
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="UI/SettingsPanel/CenterContainer/VBoxContainer" unique_id=1058229954]
+process_mode = 2
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="UI/SettingsPanel/CenterContainer/VBoxContainer" unique_id=1726411911]
+process_mode = 2
+layout_mode = 2
+text = "Back
+"
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=252856178]
 stream = ExtResource("7_272bh")
 volume_db = 2.498

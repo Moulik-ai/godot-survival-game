@@ -49,6 +49,15 @@ public partial class Player : CharacterBody2D
 	private int bestWave = 0;
 	private int bestTime = 0;
 	private PackedScene damageTextScene;
+	private Panel pausePanel;
+	private Button resumeButton;
+	private Button restartButton;
+	private Button settingsPauseButton;
+	private Button quitPauseButton;
+	private Button backButton;
+	private Panel settingsPanel;
+	
+	private bool isPaused = false;
 	
 	
 	public override void _Ready()
@@ -82,6 +91,18 @@ public partial class Player : CharacterBody2D
 		bulletDamageButton.Pressed += UpgradeBulletDamage;
 		LoadHighScore();
 		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
+		pausePanel = GetTree().Root.GetNode<Panel>("Main/UI/PausePanel");
+		resumeButton = GetTree().Root.GetNode<Button>("Main/UI/PausePanel/CenterContainer/VBoxContainer/ResumeButton");
+		restartButton = GetTree().Root.GetNode<Button>("Main/UI/PausePanel/CenterContainer/VBoxContainer/RestartButton");
+		settingsPauseButton = GetTree().Root.GetNode<Button>("Main/UI/PausePanel/CenterContainer/VBoxContainer/SettingsButton");
+		quitPauseButton = GetTree().Root.GetNode<Button>("Main/UI/PausePanel/CenterContainer/VBoxContainer/QuitButton");
+		backButton = GetTree().Root.GetNode<Button>("Main/UI/SettingsPanel/CenterContainer/VBoxContainer/BackButton");
+		settingsPanel = GetTree().Root.GetNode<Panel>("Main/UI/SettingsPanel");
+		resumeButton.Pressed += ResumePauseGame;
+		restartButton.Pressed += RestartPauseGame;
+		quitPauseButton.Pressed += QuitToMenu;
+		settingsPauseButton.Pressed += OpenSettings;
+		backButton.Pressed += CloseSettings;
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -119,6 +140,11 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("ui_space") && canShoot)
 		{
 			Shoot();
+		}
+		
+		if (Input.IsActionJustPressed("ui_cancel"))
+		{
+			TogglePause();
 		}
 		
 		if (Input.IsActionJustPressed("ui_shift") && canDash)
@@ -390,5 +416,43 @@ private void CheckEdgeDamage(float delta)
 		using var file = FileAccess.Open("user://highscore.save", FileAccess.ModeFlags.Read);
 		bestWave = int.Parse(file.GetLine());
 		bestTime = int.Parse(file.GetLine());
+	}
+	
+	private void TogglePause()
+	{
+		isPaused = !isPaused;
+		pausePanel.Visible = isPaused;
+		GetTree().Paused = isPaused;
+	}
+	
+	private void ResumePauseGame()
+	{
+		isPaused = false;
+		pausePanel.Visible = false;
+		GetTree().Paused = false;
+	}
+	
+	private void RestartPauseGame()
+	{
+		GetTree().Paused = false;
+		GetTree().ReloadCurrentScene();
+	}
+	
+	private void QuitToMenu()
+	{
+		GetTree().Paused = false;
+		GetTree().ChangeSceneToFile("res://MainMenu.tscn");
+	}
+	
+	private void OpenSettings()
+	{
+		pausePanel.Visible = false;
+		settingsPanel.Visible = true;
+	}
+	
+	private void CloseSettings()
+	{
+		pausePanel.Visible = true;
+		settingsPanel.Visible = false;
 	}
 }
