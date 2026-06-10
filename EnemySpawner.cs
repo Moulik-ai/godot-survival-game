@@ -154,6 +154,8 @@ public partial class EnemySpawner: Node
 	private void StartWave()
 	{
 		waveLabel.Text = "WAVE " + currentWave;
+		AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
+		achievements.CheckWave(currentWave);
 		enemiesToSpawn = currentWave * 5;
 		enemiesAlive = enemiesToSpawn;
 		spawnTimer.Start();

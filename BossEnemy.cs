@@ -83,6 +83,8 @@ public partial class BossEnemy: CharacterBody2D
 		
 		if (isCrit)
 		{
+			AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
+			achievements.RegisterCrit();
 			damageText.Text = "💥 CRITICAL" + damage;
 			damageText.Modulate = Colors.Gold;
 			criticalSound.Play();
@@ -125,6 +127,8 @@ public partial class BossEnemy: CharacterBody2D
 			ShowBossDefeatBanner();
 			await ToSignal(GetTree().CreateTimer(2f), "timeout");
 			bossDefeatedLabel.Visible = false;
+			AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
+			achievements.BossKilled();
 			QueueFree();
 		}
 		

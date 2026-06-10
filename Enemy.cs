@@ -46,6 +46,8 @@ public partial class Enemy: CharacterBody2D
 		
 		if (isCrit)
 		{
+			AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
+			achievements.RegisterCrit();
 			criticalSound.Play();
 			damageText.Text = "💥" + damage;
 			damageText.Modulate = Colors.Gold;
@@ -71,6 +73,8 @@ public partial class Enemy: CharacterBody2D
 			deathParticles.GlobalPosition = GlobalPosition;
 			deathParticles.Emitting = true;
 			Visible = false;
+			AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
+			achievements.EnemyKilled();
 			await ToSignal(GetTree().CreateTimer(0.5f),"timeout");
 			XPOrb orb = xpOrbScene.Instantiate<XPOrb>();
 			orb.Position = Position;

@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b8ds4hnxbjnuq" path="res://Player.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://benxnvd2mvcgm" path="res://EnemySpawner.cs" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://c6txtoxvb3o1n" path="res://AchievementManager.cs" id="4_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://c7e2isxmstoax" path="res://GameMusic.mp3" id="7_272bh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
@@ -364,9 +365,23 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 55
 text = "👑BOSS DEFEATED👑"
 
+[node name="AchievementLabel" type="Label" parent="UI" unique_id=36621706]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -21.0
+offset_bottom = 34.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "\"\""
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=252856178]
 stream = ExtResource("7_272bh")
 volume_db = 2.498
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="AchievementManager" type="Node" parent="." unique_id=1490411204]
+script = ExtResource("4_1bvp3")

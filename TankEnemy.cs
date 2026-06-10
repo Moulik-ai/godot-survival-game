@@ -49,6 +49,8 @@ public partial class TankEnemy: CharacterBody2D
 		
 		if (isCrit)
 		{
+			AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
+			achievements.RegisterCrit();
 			criticalSound.Play();
 			damageText.Text = "💥" + damage;
 			damageText.Modulate = Colors.Gold;
@@ -80,6 +82,8 @@ public partial class TankEnemy: CharacterBody2D
 			deathParticles.Reparent(GetTree().CurrentScene);
 			deathParticles.GlobalPosition = GlobalPosition;
 			deathParticles.Emitting = true;
+			AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
+			achievements.EnemyKilled();
 			Visible = false;
 			await ToSignal(GetTree().CreateTimer(0.5f),"timeout");
 			XPOrb orb = xpOrbScene.Instantiate<XPOrb>();
