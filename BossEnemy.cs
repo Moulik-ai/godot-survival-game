@@ -26,6 +26,7 @@ public partial class BossEnemy: CharacterBody2D
 	private bool isElite = false;
 	private PackedScene damageTextScene;
 	private AudioStreamPlayer criticalSound;
+	private Label bossDefeatedLabel;
 	
 	public override void _Ready()
 	{
@@ -39,6 +40,7 @@ public partial class BossEnemy: CharacterBody2D
 		bossHealthBar.Value = Health;
 		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
 		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
+		bossDefeatedLabel = GetTree().Root.GetNode<Label>("Main/UI/BossDefeatedLabel");
 		
 		if(isElite)
 		{
@@ -119,6 +121,10 @@ public partial class BossEnemy: CharacterBody2D
 			bossHealthBar.Visible = false;
 			EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
 			spawner.BossKilled();
+			GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
+			ShowBossDefeatBanner();
+			await ToSignal(GetTree().CreateTimer(2f), "timeout");
+			bossDefeatedLabel.Visible = false;
 			QueueFree();
 		}
 		
@@ -148,5 +154,17 @@ public partial class BossEnemy: CharacterBody2D
 		XPReward *= 3;
 		Scale *= 1.5f;
 		Modulate = Colors.Gold;
+	}
+	
+	private async void ShowBossDefeatBanner()
+	{
+		bossDefeatedLabel.Visible = true;
+		bossDefeatedLabel.Scale = new Vector2(0.5f, 0.5f);
+		Tween tween = CreateTween();
+		tween.TweenProperty(
+			bossDefeatedLabel,
+			"scale",
+			new Vector2 (1f, 1f),
+			0.3f);
 	}
 }
