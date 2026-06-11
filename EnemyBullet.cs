@@ -9,6 +9,7 @@ public partial class EnemyBullet: Area2D
 	public override void _Process(double delta)
 	{
 		Position += Direction * Speed * (float)delta;
+		Rotation = Direction.Angle();
 	}
 	
 	private void OnBodyEntered(Node body)

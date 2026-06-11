@@ -1,21 +1,39 @@
 [gd_scene format=3 uid="uid://cwtxxtai7h8pk"]
 
 [ext_resource type="Script" uid="uid://wxly6scoelo4" path="res://XPOrb.cs" id="1_x6nxk"]
+[ext_resource type="Texture2D" uid="uid://cne7whc3fo565" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Particle FX/Dust_01.png" id="2_865k8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hy08u"]
 radius = 8.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj5ed"]
+atlas = ExtResource("2_865k8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_drlxq"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj5ed")
+}],
+"loop": true,
+"name": &"orb",
+"speed": 5.0
+}]
+
 [node name="XPOrb" type="Area2D" unique_id=128065102]
 script = ExtResource("1_x6nxk")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1081585732]
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-color = Color(0.019607844, 1, 1, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=468764731]
 shape = SubResource("CircleShape2D_hy08u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=692893083]
+sprite_frames = SubResource("SpriteFrames_drlxq")
+animation = &"orb"
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

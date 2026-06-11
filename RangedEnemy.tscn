@@ -2,17 +2,164 @@
 
 [ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="1_05t1g"]
 [ext_resource type="Script" uid="uid://d38rxq4su0c5y" path="res://RangedEnemy.cs" id="2_o20mk"]
+[ext_resource type="Texture2D" uid="uid://ftnucjfi4n6v" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Archer/Archer_Idle.png" id="3_8ir81"]
+[ext_resource type="Texture2D" uid="uid://3kwaomvduigs" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Archer/Archer_Run.png" id="4_jv78n"]
+[ext_resource type="Texture2D" uid="uid://62qylekmvxvl" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Archer/Archer_Shoot.png" id="5_rstb1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xouhe"]
+atlas = ExtResource("3_8ir81")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhpx2"]
+atlas = ExtResource("3_8ir81")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h38p"]
+atlas = ExtResource("3_8ir81")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue4ar"]
+atlas = ExtResource("3_8ir81")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16mu6"]
+atlas = ExtResource("3_8ir81")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwcr8"]
+atlas = ExtResource("3_8ir81")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th7dw"]
+atlas = ExtResource("4_jv78n")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uw5w"]
+atlas = ExtResource("4_jv78n")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxg52"]
+atlas = ExtResource("4_jv78n")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_encwq"]
+atlas = ExtResource("4_jv78n")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x47wm"]
+atlas = ExtResource("5_rstb1")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1iw7i"]
+atlas = ExtResource("5_rstb1")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8p78"]
+atlas = ExtResource("5_rstb1")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iowin"]
+atlas = ExtResource("5_rstb1")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1vn7"]
+atlas = ExtResource("5_rstb1")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxv85"]
+atlas = ExtResource("5_rstb1")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3414y"]
+atlas = ExtResource("5_rstb1")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bfvx"]
+atlas = ExtResource("5_rstb1")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x667g"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xouhe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhpx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h38p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue4ar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16mu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwcr8")
+}],
+"loop": true,
+"name": &"enemyIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th7dw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uw5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxg52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_encwq")
+}],
+"loop": true,
+"name": &"enemyRun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x47wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1iw7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8p78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iowin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1vn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxv85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3414y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bfvx")
+}],
+"loop": true,
+"name": &"enemyShoot",
+"speed": 5.0
+}]
 
 [node name="Enemy" unique_id=1442220574 instance=ExtResource("1_05t1g")]
 script = ExtResource("2_o20mk")
 XPReward = 1
 Health = 1
 
-[node name="ColorRect" parent="." index="0" unique_id=52408027]
-color = Color(0.48052865, 0.2232401, 0, 1)
-
-[node name="Explosionsound" parent="." index="3" unique_id=1997336640]
-bus = &"SFX"
-
-[node name="CriticalSound" parent="." index="4" unique_id=551425234]
-bus = &"SFX"
+[node name="AnimatedSprite2D" parent="." index="4" unique_id=1444731746]
+sprite_frames = SubResource("SpriteFrames_x667g")
+animation = &"default"

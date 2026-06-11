@@ -19,6 +19,7 @@ public partial class FastEnemy: CharacterBody2D
 	private bool isElite = false;
 	private PackedScene damageTextScene;
 	private AudioStreamPlayer criticalSound;
+	private AnimatedSprite2D sprite;
 	
 	public override void _Ready()
 	{
@@ -29,6 +30,7 @@ public partial class FastEnemy: CharacterBody2D
 		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
 		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
 		criticalSound = GetNode<AudioStreamPlayer>("CriticalSound");
+		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -37,6 +39,16 @@ public partial class FastEnemy: CharacterBody2D
 			return;
 		Vector2 direction = (player.Position - Position).Normalized();
 		Velocity = direction * Speed;
+		sprite.Play("enemyRun");
+		
+		if (direction.X < 0)
+		{
+			sprite.FlipH = true;
+		}
+		else if (direction.X > 0)
+		{
+			sprite.FlipH = false;
+		}
 		
 		MoveAndSlide();
 		}
@@ -96,8 +108,8 @@ public partial class FastEnemy: CharacterBody2D
 		Health *= 3;
 		Speed *= 1.3f;
 		XPReward *= 3;
-		Scale *= 1.5f;
-		Modulate = Colors.Gold;
+		Scale *= 1.2f;
+		Modulate = Colors.Purple;
 	}
 
 }

@@ -56,6 +56,8 @@ public partial class Player : CharacterBody2D
 	private Button quitPauseButton;
 	private Button backButton;
 	private Panel settingsPanel;
+	private AnimatedSprite2D sprite;
+	private Sprite2D sprit;
 	
 	private bool isPaused = false;
 	
@@ -103,10 +105,16 @@ public partial class Player : CharacterBody2D
 		quitPauseButton.Pressed += QuitToMenu;
 		settingsPauseButton.Pressed += OpenSettings;
 		backButton.Pressed += CloseSettings;
+		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		sprit = GetNode<Sprite2D>("Bullet/Area2D/Sprite2D");
 	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
+		if (isDead)        
+		{
+			return;
+		}
 		survivalTime += (float)delta;
 		scoreLabel.Text = "Score: " + ((int)survivalTime).ToString();
 		CheckEdgeDamage ((float)delta);
@@ -153,6 +161,26 @@ public partial class Player : CharacterBody2D
 		}
 
 		direction = direction.Normalized();
+		
+		AnimatedSprite2D sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		if (direction != Vector2.Zero)
+		{
+			sprite.Play("run");
+		}
+		else
+		{
+			sprite.Play("idle");
+		}
+		
+		if (direction.X < 0)
+		{
+			sprite.FlipH = true;
+		}
+		else if (direction.X > 0)
+		{
+			sprite.FlipH = false;
+		}
+		
 		if (direction != Vector2.Zero)
 		{
 			lastDirection = direction;
@@ -185,7 +213,7 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-private void Die()
+private async void Die()
 {
 	GD.Print("Touched");
 	if (isDead)        
@@ -193,6 +221,7 @@ private void Die()
 		
 	isDead = true;
 	GD.Print ("GAME OVER");
+	await ToSignal(GetTree().CreateTimer(1f), "timeout");
 	gameOverPanel.Visible = true;
 	EnemySpawner spawner = GetTree().Root.GetNode<EnemySpawner>("Main/EnemySpawner");
 	int WaveReached = spawner.GetCurrentWave();
@@ -213,7 +242,6 @@ private void Die()
 
 private async void Shoot()
 {
-	
 	for (int i = 0; i < bulletCount; i++){
 		Bullet bullet = bulletScene.Instantiate<Bullet>();
 		bool isCrit = GD.Randf() < (critChance / 100f);
@@ -228,12 +256,13 @@ private async void Shoot()
 		{
 			bullet.Damage = bulletDamage;
 		}
-		bullet.Position = Position;
+		bullet.Position = Position + lastDirection * 20f;
 		float spreadAngle = Mathf.DegToRad((i - (bulletCount-1)/2.0f)*15);
 		bullet.Direction = lastDirection.Rotated(spreadAngle);
 		GetTree().CurrentScene.AddChild(bullet);
 	}
 	shootSound.Play();
+	sprite.Play("shoot");
 	canShoot = false;
 	await ToSignal (GetTree().CreateTimer(ShootCooldown), "timeout");
 	canShoot = true;
@@ -335,7 +364,7 @@ public async void TakeDamage()
 	Modulate = Colors.Red;
 	
 	await ToSignal(GetTree().CreateTimer(1f), "timeout");
-	Modulate = Colors.Cyan;
+	Modulate = Colors.White;
 	isInvincible = false;
 	
 }

@@ -18,6 +18,7 @@ public partial class EnemySpawner: Node
 	private bool bossAlive = false;
 	private Player player;
 	private PackedScene rangedEnemyScene;
+	private Label waveBannerLabel;
 	
 	public override void _Ready()
 	{
@@ -32,6 +33,7 @@ public partial class EnemySpawner: Node
 		waveLabel = GetTree().Root.GetNode<Label>("Main/UI/WaveLabel");
 		player = GetTree().Root.GetNode<Player>("Main/Player");
 		StartWave();
+		waveBannerLabel = GetTree().Root.GetNode<Label>("Main/UI/WaveBannerLabel");
 	}
 	
 	public override void _Process(double delta)
@@ -156,6 +158,7 @@ public partial class EnemySpawner: Node
 		waveLabel.Text = "WAVE " + currentWave;
 		AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
 		achievements.CheckWave(currentWave);
+		ShowWaveBanner(currentWave);
 		enemiesToSpawn = currentWave * 5;
 		enemiesAlive = enemiesToSpawn;
 		spawnTimer.Start();
@@ -199,5 +202,14 @@ public partial class EnemySpawner: Node
 	public int GetCurrentWave()
 	{
 		return currentWave;
+	}
+	
+	private async void ShowWaveBanner(int wave)
+	{
+		waveBannerLabel.Text = "🌊 WAVE " + wave + " 🌊";
+		waveBannerLabel.Visible = true;
+		await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
+		waveBannerLabel.Visible = false;
+		
 	}
 }

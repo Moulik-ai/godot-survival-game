@@ -1,15 +1,113 @@
 [gd_scene format=3 uid="uid://bcp23kn2aj76k"]
 
 [ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="1_j15ty"]
+[ext_resource type="Texture2D" uid="uid://c8cqkh2f1e8ct" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Yellow Units/Lancer/Lancer_Run.png" id="2_o1aiq"]
+[ext_resource type="Texture2D" uid="uid://d0scww3vrsqns" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Purple Units/Lancer/Lancer_Run.png" id="2_yp437"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc863"]
+atlas = ExtResource("2_yp437")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5ek4"]
+atlas = ExtResource("2_yp437")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pitea"]
+atlas = ExtResource("2_yp437")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dly0u"]
+atlas = ExtResource("2_yp437")
+region = Rect2(960, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e2o2"]
+atlas = ExtResource("2_yp437")
+region = Rect2(1280, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xet5e"]
+atlas = ExtResource("2_yp437")
+region = Rect2(1600, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yp437"]
+atlas = ExtResource("2_o1aiq")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6s3p"]
+atlas = ExtResource("2_o1aiq")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guacg"]
+atlas = ExtResource("2_o1aiq")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7sdn"]
+atlas = ExtResource("2_o1aiq")
+region = Rect2(960, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjhi0"]
+atlas = ExtResource("2_o1aiq")
+region = Rect2(1280, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uam5"]
+atlas = ExtResource("2_o1aiq")
+region = Rect2(1600, 0, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jc863"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jc863")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5ek4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pitea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dly0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6e2o2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xet5e")
+}],
+"loop": true,
+"name": &"eliteEnemy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yp437")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6s3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guacg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7sdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjhi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uam5")
+}],
+"loop": true,
+"name": &"enemyRun",
+"speed": 5.0
+}]
 
 [node name="Enemy" unique_id=1442220574 instance=ExtResource("1_j15ty")]
 Speed = 210.0
 
-[node name="ColorRect" parent="." index="0" unique_id=52408027]
-color = Color(0.3503683, 0.2759387, 0.9198455, 1)
-
-[node name="Explosionsound" parent="." index="3" unique_id=1997336640]
-bus = &"SFX"
-
-[node name="CriticalSound" parent="." index="4" unique_id=551425234]
-bus = &"SFX"
+[node name="AnimatedSprite2D" parent="." index="4" unique_id=1444731746]
+sprite_frames = SubResource("SpriteFrames_jc863")

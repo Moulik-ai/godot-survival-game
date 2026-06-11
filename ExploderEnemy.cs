@@ -19,6 +19,7 @@ public partial class ExploderEnemy: CharacterBody2D
 	private bool hasExploded = false;
 	private PackedScene damageTextScene;
 	private AudioStreamPlayer criticalSound;
+	private AnimatedSprite2D sprite;
 	
 	public override void _Ready()
 	{
@@ -29,6 +30,7 @@ public partial class ExploderEnemy: CharacterBody2D
 		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
 		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
 		criticalSound = GetNode<AudioStreamPlayer>("CriticalSound");
+		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -41,6 +43,16 @@ public partial class ExploderEnemy: CharacterBody2D
 			return;
 		Vector2 direction = (player.Position - Position).Normalized();
 		Velocity = direction * Speed;
+		sprite.Play("enemyRun");
+		
+		if (direction.X < 0)
+		{
+			sprite.FlipH = true;
+		}
+		else if (direction.X > 0)
+		{
+			sprite.FlipH = false;
+		}
 		
 		MoveAndSlide();
 	}

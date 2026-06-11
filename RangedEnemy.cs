@@ -22,6 +22,7 @@ public partial class RangedEnemy: CharacterBody2D
 	private bool isElite = false;
 	private PackedScene damageTextScene;
 	private AudioStreamPlayer criticalSound;
+	private AnimatedSprite2D sprite;
 	
 	public override void _Ready()
 	{
@@ -33,6 +34,7 @@ public partial class RangedEnemy: CharacterBody2D
 		enemyBulletScene = GD.Load<PackedScene>("res://EnemyBullet.tscn");
 		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
 		criticalSound = GetNode<AudioStreamPlayer>("CriticalSound");
+		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -52,6 +54,23 @@ public partial class RangedEnemy: CharacterBody2D
 			{
 				Shoot();
 			}
+		}
+		if (direction != Vector2.Zero)
+		{
+			sprite.Play("enemyRun");
+		}
+		else
+		{
+			sprite.Play("enemyidle");
+		}
+		
+		if (direction.X < 0)
+		{
+			sprite.FlipH = true;
+		}
+		else if (direction.X > 0)
+		{
+			sprite.FlipH = false;
 		}
 		
 		MoveAndSlide();
@@ -123,7 +142,7 @@ public partial class RangedEnemy: CharacterBody2D
 		Health *= 3;
 		Speed *= 1.3f;
 		XPReward *= 3;
-		Scale *= 1.5f;
-		Modulate = Colors.Gold;
+		Scale *= 1.2f;
+		Modulate = Colors.Purple;
 	}
 }

@@ -2,6 +2,62 @@
 
 [ext_resource type="PackedScene" uid="uid://b60n31awxl5q8" path="res://TankEnemy.tscn" id="1_lthbl"]
 [ext_resource type="Script" uid="uid://dheivi1a4jqax" path="res://BossEnemy.cs" id="2_owohs"]
+[ext_resource type="Texture2D" uid="uid://d3qim1m0m8kv6" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Run.png" id="3_167hc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha6x1"]
+atlas = ExtResource("3_167hc")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmhxi"]
+atlas = ExtResource("3_167hc")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdx5x"]
+atlas = ExtResource("3_167hc")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uexw5"]
+atlas = ExtResource("3_167hc")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdyv7"]
+atlas = ExtResource("3_167hc")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjfxh"]
+atlas = ExtResource("3_167hc")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4pflt"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha6x1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmhxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdx5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uexw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdyv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjfxh")
+}],
+"loop": true,
+"name": &"enemyRun",
+"speed": 5.0
+}]
 
 [node name="Enemy" unique_id=1442220574 instance=ExtResource("1_lthbl")]
 scale = Vector2(3, 3)
@@ -9,5 +65,6 @@ script = ExtResource("2_owohs")
 Speed = 100.0
 Health = 30
 
-[node name="ColorRect" parent="." index="0" unique_id=52408027]
-color = Color(0.060959928, 0.014399986, 0.48, 1)
+[node name="AnimatedSprite2D" parent="." index="4" unique_id=1444731746]
+sprite_frames = SubResource("SpriteFrames_4pflt")
+animation = &"enemyRun"

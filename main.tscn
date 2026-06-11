@@ -6,16 +6,16 @@
 [ext_resource type="AudioStream" uid="uid://c7e2isxmstoax" path="res://GameMusic.mp3" id="7_272bh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(800, 10)
+size = Vector2(1000, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(10, 600)
+size = Vector2(20, 800)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
-size = Vector2(10, 600)
+size = Vector2(20, 800)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
-size = Vector2(800, 10)
+size = Vector2(1000, 20)
 
 [node name="Main" type="Node2D" unique_id=1702702789]
 
@@ -374,6 +374,19 @@ offset_left = -21.0
 offset_bottom = 34.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
+text = "\"\""
+
+[node name="WaveBannerLabel" type="Label" parent="UI" unique_id=374245788]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_right = 22.5
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.07058824, 1, 1, 1)
+theme_override_font_sizes/font_size = 52
 text = "\"\""
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=252856178]

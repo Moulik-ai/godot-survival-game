@@ -27,6 +27,7 @@ public partial class BossEnemy: CharacterBody2D
 	private PackedScene damageTextScene;
 	private AudioStreamPlayer criticalSound;
 	private Label bossDefeatedLabel;
+	private AnimatedSprite2D sprite;
 	
 	public override void _Ready()
 	{
@@ -41,6 +42,7 @@ public partial class BossEnemy: CharacterBody2D
 		explosionSound = GetNode<AudioStreamPlayer>("Explosionsound");
 		damageTextScene = GD.Load<PackedScene>("res://DamageText.tscn");
 		bossDefeatedLabel = GetTree().Root.GetNode<Label>("Main/UI/BossDefeatedLabel");
+		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		
 		if(isElite)
 		{
@@ -63,6 +65,17 @@ public partial class BossEnemy: CharacterBody2D
 			chargeTimer += (float)delta;
 		Vector2 direction = (player.Position - Position).Normalized();
 		Velocity = direction * Speed;
+		
+		sprite.Play("enemyRun");
+		
+		if (direction.X < 0)
+		{
+			sprite.FlipH = true;
+		}
+		else if (direction.X > 0)
+		{
+			sprite.FlipH = false;
+		}
 		
 		if (chargeTimer >= 4f)
 		{
@@ -156,8 +169,8 @@ public partial class BossEnemy: CharacterBody2D
 		Health *= 2;
 		Speed *= 1.2f;
 		XPReward *= 3;
-		Scale *= 1.5f;
-		Modulate = Colors.Gold;
+		Scale *= 1.2f;
+		Modulate = Colors.Purple;
 	}
 	
 	private async void ShowBossDefeatBanner()

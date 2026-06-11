@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dykhg2bxwmy47" path="res://Enemy.cs" id="1_tt7e2"]
 [ext_resource type="AudioStream" uid="uid://bvrpml3auuu3x" path="res://kenney_desert-shooter-pack_1.0/Sounds/explosion-b.ogg" id="2_s7bn3"]
 [ext_resource type="AudioStream" uid="uid://ddmsegflmm7se" path="res://universfield-deadly-strike-352458.mp3" id="3_2hac7"]
+[ext_resource type="Texture2D" uid="uid://cxfquvfoujxi7" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Lancer/Lancer_Run.png" id="4_e6d4v"]
+[ext_resource type="Texture2D" uid="uid://d0scww3vrsqns" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Purple Units/Lancer/Lancer_Run.png" id="4_qp131"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqquq"]
 
@@ -18,16 +20,111 @@ initial_velocity_min = 100.0
 initial_velocity_max = 200.0
 gravity = Vector3(0, 98, 0)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4qr3"]
+atlas = ExtResource("4_qp131")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73x2u"]
+atlas = ExtResource("4_qp131")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iwxp"]
+atlas = ExtResource("4_qp131")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v6dm"]
+atlas = ExtResource("4_qp131")
+region = Rect2(960, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r3mv"]
+atlas = ExtResource("4_qp131")
+region = Rect2(1280, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jccr3"]
+atlas = ExtResource("4_qp131")
+region = Rect2(1600, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp131"]
+atlas = ExtResource("4_e6d4v")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6do27"]
+atlas = ExtResource("4_e6d4v")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvmyp"]
+atlas = ExtResource("4_e6d4v")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nxwx"]
+atlas = ExtResource("4_e6d4v")
+region = Rect2(960, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52xpa"]
+atlas = ExtResource("4_e6d4v")
+region = Rect2(1280, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdgko"]
+atlas = ExtResource("4_e6d4v")
+region = Rect2(1600, 0, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j4qr3"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4qr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73x2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iwxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4v6dm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r3mv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jccr3")
+}],
+"loop": true,
+"name": &"eliteEnemy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp131")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6do27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvmyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nxwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52xpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdgko")
+}],
+"loop": true,
+"name": &"enemyRun",
+"speed": 5.0
+}]
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1442220574]
 motion_mode = 1
 script = ExtResource("1_tt7e2")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=52408027]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(0.6337619, 0.2928271, 0.29979452, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1149805181]
 shape = SubResource("RectangleShape2D_gqquq")
@@ -48,3 +145,7 @@ bus = &"SFX"
 [node name="CriticalSound" type="AudioStreamPlayer" parent="." unique_id=551425234]
 stream = ExtResource("3_2hac7")
 bus = &"SFX"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1444731746]
+sprite_frames = SubResource("SpriteFrames_j4qr3")
+animation = &"eliteEnemy"
