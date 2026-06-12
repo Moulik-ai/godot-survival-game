@@ -152,10 +152,10 @@ public partial class BossEnemy: CharacterBody2D
 	
 	private async void StartCharge()
 	{
+		sprite.Play("enemyCharge");
 		Modulate = Colors.Yellow;
 		await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
 		chargeDirection = (player.Position - Position).Normalized();
-		Modulate = Colors.Red;
 		isCharging = true;
 		await ToSignal(GetTree().CreateTimer(chargeDuration), "timeout");
 		
@@ -175,13 +175,21 @@ public partial class BossEnemy: CharacterBody2D
 	
 	private async void ShowBossDefeatBanner()
 	{
+		bossDefeatedLabel.Modulate = new Color(1,1,1,1);
 		bossDefeatedLabel.Visible = true;
 		bossDefeatedLabel.Scale = new Vector2(0.5f, 0.5f);
 		Tween tween = CreateTween();
 		tween.TweenProperty(
 			bossDefeatedLabel,
 			"scale",
-			new Vector2 (1f, 1f),
-			0.3f);
+			new Vector2 (1.2f, 1.2f),
+			0.2f);
+			
+			Tween fade = CreateTween();
+			fade.TweenProperty(
+			bossDefeatedLabel,
+			"modulate:a",
+			0f,
+			0.5f);
 	}
 }

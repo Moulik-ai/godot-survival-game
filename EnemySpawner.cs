@@ -133,8 +133,8 @@ public partial class EnemySpawner: Node
 		bossAlive = true;
 		Random random = new Random();
 		
-		float x = random.Next(50,750);
-		float y = random.Next(50,550);
+		float x = random.Next(50,950);
+		float y = random.Next(50,750);
 		
 		Node2D boss=   
 			bossScene.Instantiate<Node2D>();
@@ -159,7 +159,7 @@ public partial class EnemySpawner: Node
 		AchievementManager achievements = GetTree().Root.GetNode<AchievementManager>("Main/AchievementManager");
 		achievements.CheckWave(currentWave);
 		ShowWaveBanner(currentWave);
-		enemiesToSpawn = currentWave * 5;
+		enemiesToSpawn = currentWave * 6;
 		enemiesAlive = enemiesToSpawn;
 		spawnTimer.Start();
 		GD.Print("Starting Wave" + currentWave);
@@ -206,9 +206,27 @@ public partial class EnemySpawner: Node
 	
 	private async void ShowWaveBanner(int wave)
 	{
-		waveBannerLabel.Text = "🌊 WAVE " + wave + " 🌊";
+		waveBannerLabel.Text = "⚔️ WAVE " + wave + " ⚔️";
+		waveBannerLabel.Modulate = new Color(1,1,1,1);
 		waveBannerLabel.Visible = true;
+		waveBannerLabel.Scale = new Vector2(0.5f, 0.5f);
+		Tween tween = CreateTween();
+		tween.TweenProperty(
+			waveBannerLabel,
+			"scale",
+			new Vector2 (1.2f, 1.2f),
+			0.2f);
 		await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
+		
+		Tween fade = CreateTween();
+		
+		fade.TweenProperty(
+			waveBannerLabel,
+			"modulate:a",
+			0f,
+			0.5f);
+			
+			await ToSignal(fade, "finished");
 		waveBannerLabel.Visible = false;
 		
 	}

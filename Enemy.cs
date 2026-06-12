@@ -80,6 +80,7 @@ public partial class Enemy: CharacterBody2D
 		explosionSound.Play();
 		if (Health <= 0)
 		{
+			sprite.Play("enemyDie");
 			CameraController camera = GetTree().Root.GetNode<CameraController>("Main/Player/Camera2D");
 			camera.Shake(8f);
 			deathParticles.Reparent(GetTree().CurrentScene);

@@ -23,7 +23,26 @@ public async void UnlockAchievement(string title)
 	unlocked.Add(title);
 	achievementLabel.Text = "🏆 " + title;
 	achievementLabel.Visible = true;
+	
+	achievementLabel.Position = new Vector2(achievementLabel.Position.X, -100);
+	Tween slideIn = CreateTween();
+	
+	slideIn.TweenProperty(
+		achievementLabel,
+		"position:y",
+		50,
+		0.4f);
 	await ToSignal(GetTree().CreateTimer(3f), "timeout");
+	
+	Tween slideOut = CreateTween();
+	
+	slideOut.TweenProperty(
+		achievementLabel,
+		"position:y",
+		-100,
+		0.4f);
+		
+		await ToSignal(slideOut, "finished");
 	achievementLabel.Visible = false;
 }
 

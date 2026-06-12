@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ddmsegflmm7se" path="res://universfield-deadly-strike-352458.mp3" id="3_2hac7"]
 [ext_resource type="Texture2D" uid="uid://cxfquvfoujxi7" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Lancer/Lancer_Run.png" id="4_e6d4v"]
 [ext_resource type="Texture2D" uid="uid://d0scww3vrsqns" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Purple Units/Lancer/Lancer_Run.png" id="4_qp131"]
+[ext_resource type="Texture2D" uid="uid://v8eryqq7lb0d" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Particle FX/Explosion_02.png" id="5_6do27"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqquq"]
 
@@ -43,6 +44,46 @@ region = Rect2(1280, 0, 320, 320)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jccr3"]
 atlas = ExtResource("4_qp131")
 region = Rect2(1600, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jd3y4"]
+atlas = ExtResource("5_6do27")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6feu"]
+atlas = ExtResource("5_6do27")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npdxj"]
+atlas = ExtResource("5_6do27")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxvgb"]
+atlas = ExtResource("5_6do27")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qy3v"]
+atlas = ExtResource("5_6do27")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smfg5"]
+atlas = ExtResource("5_6do27")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdb26"]
+atlas = ExtResource("5_6do27")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn8ps"]
+atlas = ExtResource("5_6do27")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1k6s"]
+atlas = ExtResource("5_6do27")
+region = Rect2(1536, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir673"]
+atlas = ExtResource("5_6do27")
+region = Rect2(1728, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qp131"]
 atlas = ExtResource("4_e6d4v")
@@ -100,6 +141,41 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jd3y4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6feu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npdxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxvgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qy3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smfg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdb26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn8ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1k6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir673")
+}],
+"loop": true,
+"name": &"enemyDie",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qp131")
 }, {
 "duration": 1.0,
@@ -148,4 +224,4 @@ bus = &"SFX"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1444731746]
 sprite_frames = SubResource("SpriteFrames_j4qr3")
-animation = &"eliteEnemy"
+animation = &"enemyDie"

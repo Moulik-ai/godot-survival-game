@@ -13,12 +13,12 @@ config_version=5
 config/name="MovingSquare"
 run/main_scene="uid://cdw26b8vuw183"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://2yugb2h8se1d"
 
 [display]
 
-window/size/viewport_width=800
-window/size/viewport_height=600
+window/size/viewport_width=1000
+window/size/viewport_height=800
 window/stretch/mode="canvas_items"
 
 [dotnet]

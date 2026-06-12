@@ -10,6 +10,9 @@ public partial class MainMenu : Control
 	private HSlider musicSlider;
 	private HSlider sfxSlider;
 	private Button backButton;
+	private Panel creditsPanel;
+	private Button creditsButton;
+	private Button backsButton;
 	
 	public override void _Ready()
 	{
@@ -20,6 +23,9 @@ public partial class MainMenu : Control
 		musicSlider = GetNode<HSlider>("SettingsPanel/CenterContainer/VBoxContainer/MusicSlider");
 		sfxSlider = GetNode<HSlider>("SettingsPanel/CenterContainer/VBoxContainer/SFXSlider");
 		backButton = GetNode<Button>("SettingsPanel/CenterContainer/VBoxContainer/BackButton");
+		creditsPanel = GetNode<Panel>("CreditsPanel");
+		creditsButton = GetNode<Button>("CenterContainer/VBoxContainer/CreditsButton");
+		backsButton = GetNode<Button>("CreditsPanel/TextureRect/BacksButton");
 		
 		playButton.Pressed += PlayGame;
 		settingsButton.Pressed += OpenSettings;
@@ -27,6 +33,8 @@ public partial class MainMenu : Control
 		backButton.Pressed += CloseSettings;
 		musicSlider.ValueChanged += UpdateMusicVolume;
 		sfxSlider.ValueChanged += UpdateSFXVolume;
+		creditsButton.Pressed += ShowCredits;
+		backsButton.Pressed += HideCredits;
 	}
 	
 	private void PlayGame()
@@ -57,5 +65,15 @@ public partial class MainMenu : Control
 	private void UpdateSFXVolume(double Value)
 	{
 		AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb((float) Value/100f));
+	}
+	
+	private void ShowCredits()
+	{
+		creditsPanel.Visible = true;
+	}
+	
+	private void HideCredits()
+	{
+		creditsPanel.Visible = false;
 	}
 }

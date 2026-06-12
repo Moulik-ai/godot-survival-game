@@ -376,7 +376,7 @@ private void RetryGame(){
 
 private void CheckEdgeDamage(float delta)
 {
-	bool touchingEdge = Position.X <= 20 || Position.X >= 780 || Position.Y <= 20 || Position.Y >= 580;
+	bool touchingEdge = Position.X <= 20 || Position.X >= 980 || Position.Y <= 20 || Position.Y >= 780;
 	
 	if (touchingEdge)
 	{

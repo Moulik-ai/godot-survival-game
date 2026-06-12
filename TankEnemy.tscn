@@ -3,6 +3,47 @@
 [ext_resource type="PackedScene" uid="uid://dlwf3r7lk23se" path="res://Enemy.tscn" id="1_of1wh"]
 [ext_resource type="Script" uid="uid://cwwwtopu1jh4d" path="res://TankEnemy.cs" id="2_sdo21"]
 [ext_resource type="Texture2D" uid="uid://d3qim1m0m8kv6" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Run.png" id="3_2k4qu"]
+[ext_resource type="Texture2D" uid="uid://v8eryqq7lb0d" path="res://Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Particle FX/Explosion_02.png" id="3_3vlxy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jd3y4"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6feu"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npdxj"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxvgb"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qy3v"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smfg5"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdb26"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn8ps"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1k6s"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(1536, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir673"]
+atlas = ExtResource("3_3vlxy")
+region = Rect2(1728, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3vlxy"]
 atlas = ExtResource("3_2k4qu")
@@ -33,6 +74,41 @@ animations = [{
 "frames": [],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jd3y4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6feu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npdxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxvgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qy3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smfg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdb26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn8ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1k6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir673")
+}],
+"loop": true,
+"name": &"enemyDie",
 "speed": 5.0
 }, {
 "frames": [{
