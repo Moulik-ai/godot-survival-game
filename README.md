@@ -52,12 +52,8 @@ https://moulik-ai.itch.io/lastknightstanding
 
 ## Screenshots
 
-Add screenshots of:
+<img width="997" height="797" alt="Screenshot 2026-06-12 170245" src="https://github.com/user-attachments/assets/e6758c0f-9742-4776-8d0f-f05939b43950" />
 
-* Main Menu
-* Gameplay
-* Boss Fight
-* Game Over Statistics Screen
 
 ## Future Updates
 
